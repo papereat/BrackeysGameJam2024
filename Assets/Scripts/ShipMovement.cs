@@ -5,24 +5,45 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
-    [SerializeField] KeyCode Left;
-    [SerializeField] KeyCode Right; 
+    [SerializeField] KeyCode Left = KeyCode.A;
+    [SerializeField] KeyCode Right = KeyCode.D;
 
-    void Update()
+    public bool can_move;
+
+    //Refernce to the Rigidbody
+    Rigidbody2D rb;
+
+    //Awake Functions Run Before the start function
+    //Only use awake function for setting references and controling things inside this object
+    //Dont try to use functions in other objects cus they wont work in awake instead use Start
+    void Awake()
     {
-        if(!Input.GetKey(Left) && !Input.GetKeyDown(Right))
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    //Runs Everyframe while boat
+    public void OnFrame()
+    {
+        if (can_move)
         {
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);     
+            Vector2 mov = new Vector2();
+
+            if (Input.GetKey(Left))
+            {
+                mov.x -= 1;
+            }
+            if (Input.GetKey(Right))
+            {
+                mov.x += 1;
+            }
+            rb.velocity = mov * movementSpeed;
         }
 
-        if(Input.GetKey(Left))
-        {
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0);
-        }
-        if(Input.GetKey(Right))
-        {
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);     
-        }
 
+    }
+
+    public Vector3 GetShipPosition()
+    {
+        return transform.position;
     }
 }
