@@ -15,11 +15,15 @@ public class PlayerManager : MonoBehaviour
     public float Money;
     public int day;
     public float time;
+    public FishingRod fishingRod;
+
+
 
 
     //These are refernces to other objects in the scene
     [Header("Refernces")]
     public ShipMovement shipMovement;
+    public FishingMinigameControler FMC;
 
 
 
@@ -58,6 +62,10 @@ public class PlayerManager : MonoBehaviour
         {
             BoatUpdate();
         }
+        else if (playerState == PlayerState.Fishing)
+        {
+            FishingUpdate();
+        }
 
         //Camera Movement
         cam.transform.position = new Vector3(camera_watch_positon.x, camera_watch_positon.y, -10);
@@ -76,6 +84,16 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    //Runs every frame while fishing
+    void FishingUpdate()
+    {
+        //Hook and other movement
+        FMC.OnFrame();
+
+        //Camera Movement
+        camera_watch_positon = FMC.GetCameraPostion();
+    }
+
 
     public Vector3 GetCurrentPosition()
     {
@@ -83,8 +101,25 @@ public class PlayerManager : MonoBehaviour
         {
             return shipMovement.GetShipPosition();
         }
+        else if (playerState == PlayerState.Fishing)
+        {
+            return FMC.GetPosition();
+        }
 
 
         return new Vector3();
     }
+
+
+    public void StartFishing()
+    {
+        playerState = PlayerState.Fishing;
+        FMC.ResetMinigame();
+    }
+
+    public void StopFishing()
+    {
+        playerState = PlayerState.Boat;
+    }
 }
+

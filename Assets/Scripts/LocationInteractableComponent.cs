@@ -7,9 +7,8 @@ public class LocationInteractableComponent : MonoBehaviour
     Collider2D this_collider;
     [SerializeField]
     KeyCode Interact_Keycode = KeyCode.Space;
-    [SerializeField]
 
-    bool interact = false;
+    public PlayerManager player;
 
     void Awake()
     {
@@ -18,6 +17,7 @@ public class LocationInteractableComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = PlayerManager.player;
     }
 
     // Update is called once per frame
