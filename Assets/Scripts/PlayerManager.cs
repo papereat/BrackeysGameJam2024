@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     //These are the stats that change over time like money and day and time
     [Header("Stats")]
     public float Money;
+    public float valueOnShip;
     public int day;
     public float time;
     public FishingRod fishingRod;
@@ -68,7 +69,12 @@ public class PlayerManager : MonoBehaviour
         }
 
         //Camera Movement
-        cam.transform.position = new Vector3(camera_watch_positon.x, camera_watch_positon.y, -10);
+        CameraMovement();
+    }
+
+    void CameraMovement()
+    {
+        cam.transform.position = new Vector3(camera_watch_positon.x, camera_watch_positon.y + 3.25f, -10);
     }
 
     //Runs every frame while in the boat state

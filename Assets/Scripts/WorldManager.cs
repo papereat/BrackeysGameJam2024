@@ -7,6 +7,8 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager wm;
+    [Header("Fishing Minigame")]
+    public float FishSpawnRange;
 
     [Header("Fishing Rod Upgrades")]
     public float[] Depth;
