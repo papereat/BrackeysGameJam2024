@@ -24,7 +24,6 @@ public class LocationInteractableComponent : MonoBehaviour
     void Update()
     {
 
-
         //Checks if the center of the player is inside the bounds of the collider
         if (this_collider.bounds.Contains(PlayerManager.player.GetCurrentPosition()))
         {
@@ -35,6 +34,8 @@ public class LocationInteractableComponent : MonoBehaviour
             {
                 OnActivate();
             }
+
+            OnFrame();
         }
     }
 
@@ -43,6 +44,12 @@ public class LocationInteractableComponent : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider)
     {
 
+
+    }
+
+    //Yousef - Unsure how else to use Update in ShopInteractible so I made and ovverided this
+    public virtual void OnFrame()
+    {
 
     }
 

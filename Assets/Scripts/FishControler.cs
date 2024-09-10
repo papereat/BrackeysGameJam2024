@@ -54,7 +54,9 @@ public class FishControler : MonoBehaviour
 
     public void CreateStats(float depth)
     {
-        value = depth;
+        //I set value to whole number, change later
+        value = Mathf.Round(depth);
+        //value = depth;
         natural_x = transform.position.x;
     }
 }

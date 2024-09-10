@@ -58,6 +58,8 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        shipMovement.EveryFrame();
+        
         //Code Due to State
         if (playerState == PlayerState.Boat)
         {
@@ -80,6 +82,7 @@ public class PlayerManager : MonoBehaviour
     //Runs every frame while in the boat state
     void BoatUpdate()
     {
+        
         //Ship Movement
         shipMovement.OnFrame();
 

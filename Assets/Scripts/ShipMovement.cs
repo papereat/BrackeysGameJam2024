@@ -42,6 +42,11 @@ public class ShipMovement : MonoBehaviour
 
     }
 
+    public void EveryFrame()
+    {
+        rb.velocity = new Vector2();
+    }
+
     public Vector3 GetShipPosition()
     {
         return transform.position;
