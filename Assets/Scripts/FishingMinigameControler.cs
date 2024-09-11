@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Burst.Intrinsics;
 //using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class FishingMinigameControler : MonoBehaviour
 {
@@ -17,6 +20,7 @@ public class FishingMinigameControler : MonoBehaviour
     public bool OnSurface;
     public bool GoingDown;
     public bool GoingUp;
+    public bool DoingFishBar;
     public int FishCollected;
     public float fishValue;
 
@@ -28,10 +32,12 @@ public class FishingMinigameControler : MonoBehaviour
 
     public float GoingDownTime;
     public float GoingUpSpeed;
+    public float GoingUpSpeedMultiplier = 1;
+    public float FishBarTime;
 
 
-
-
+    public GameObject FishingUI;
+    public GameObject GeneralUI;
 
 
 
@@ -55,6 +61,7 @@ public class FishingMinigameControler : MonoBehaviour
         GoingDown = false;
         GoingUp = false;
         OnSurface = true;
+        DoingFishBar = false;
 
         //Curretnly Telaporting the hook to the ship whenever we start fishing
         //We should eventually replace this with smth better
@@ -74,10 +81,16 @@ public class FishingMinigameControler : MonoBehaviour
         {
             GoingUpCode();
         }
+        else if(DoingFishBar)
+        {
+            FishBarCode();
+        }
     }
 
     public void OnSurfaceCode()
     {
+        GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
+        
         transform.position = player.shipMovement.GetShipPosition();
         x_location = transform.position.x;
 
@@ -85,6 +98,8 @@ public class FishingMinigameControler : MonoBehaviour
         FishCollected = 0;
         player.valueOnShip += fishValue;
         fishValue = 0;
+
+        GoingUpSpeedMultiplier = 1;
 
         //Delete any fish
         for (int i = 0; i < FishCollection.childCount; i++)
@@ -96,11 +111,26 @@ public class FishingMinigameControler : MonoBehaviour
         //For now I am going to skip this by going donw on click
         if (Input.GetKeyDown(FishKey))
         {
+            FishingUI.GetComponent<Canvas>().enabled = true;
+            DoingFishBar = true;
             OnSurface = false;
-            GoingDown = true;
+            
         }
 
 
+    }
+
+    public void FishBarCode()
+    {
+        FishBarTime = Mathf.PingPong(Time.time, 1);
+        FishingUI.transform.GetChild(0).GetComponent<Scrollbar>().value = FishBarTime;
+
+        if(Input.GetKeyDown(FishKey))
+        {
+            FishingUI.GetComponent<Canvas>().enabled = false;
+            FishBarTime = (1 - 4 * Mathf.Pow((FishBarTime - 0.5f), 2));
+            GoingDown = true;
+        }
     }
 
     public void GoingDownCode()
@@ -111,7 +141,7 @@ public class FishingMinigameControler : MonoBehaviour
 
 
         //Checks if current depth has exceded or is equal to max depth of the rod
-        if (transform.position.y * -1 >= wm.Depth[player.fishingRod.Depth])
+        if (transform.position.y * -1 >= FishBarTime * wm.Depth[player.fishingRod.Depth])
         {
             //Has hit max depth and will not start going up
             GoingDown = false;
@@ -122,7 +152,7 @@ public class FishingMinigameControler : MonoBehaviour
         }
 
         //has not hit bottom
-        rb.velocity = new Vector2(0, -1) * wm.Depth[player.fishingRod.Depth] / GoingDownTime;
+        rb.velocity = new Vector2(0, -1) * (FishBarTime * wm.Depth[player.fishingRod.Depth]) / GoingDownTime;
 
 
     }
@@ -145,20 +175,29 @@ public class FishingMinigameControler : MonoBehaviour
         //Move to mouse position
         //Eventually we will repalce this with smth smother prob a lerp
         transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, transform.position.z);
-
+        
         //Move Up
-        rb.velocity = new Vector2(0, 1) * GoingUpSpeed;
+        rb.velocity = new Vector2(0, 1) * GoingUpSpeed * GoingUpSpeedMultiplier;
 
         //Presses Key To Speeed Up Going Up
         if (Input.GetKeyDown(GoUpKey) || atCapacity())
         {
             //Eventually replace this with an animation of the hook going toward the middle and going to the ship
-            OnSurface = true;
-            GoingUp = false;
-            rb.velocity = new Vector2();
-
-            return;
+            StartCoroutine(AccelerateHook(10, 1));
         }
+    }
+    
+    //Makes the hook accelerate upward
+    IEnumerator AccelerateHook(float endSpeed, float timetillAccelerate)
+    {
+        float t = 0;
+        while(GoingUp)
+        {
+            GoingUpSpeedMultiplier = Mathf.Lerp(1, endSpeed, t);
+            t += Time.deltaTime / timetillAccelerate;
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 
     public Vector3 GetCameraPostion()
