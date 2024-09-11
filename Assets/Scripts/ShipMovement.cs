@@ -8,7 +8,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] KeyCode Left = KeyCode.A;
     [SerializeField] KeyCode Right = KeyCode.D;
 
-    public bool can_move;
+    public GameObject VFX;
 
     //Refernce to the Rigidbody
     Rigidbody2D rb;
@@ -24,20 +24,32 @@ public class ShipMovement : MonoBehaviour
     //Runs Everyframe while boat
     public void OnFrame()
     {
-        if (can_move)
-        {
-            Vector2 mov = new Vector2();
 
-            if (Input.GetKey(Left))
-            {
-                mov.x -= 1;
-            }
-            if (Input.GetKey(Right))
-            {
-                mov.x += 1;
-            }
-            rb.velocity = mov * movementSpeed;
+        Vector2 mov = new Vector2();
+        if (Input.GetKey(Left))
+        {
+            mov.x -= 1;
+
         }
+        if (Input.GetKey(Right))
+        {
+            mov.x += 1;
+
+        }
+
+
+
+        rb.velocity = mov * movementSpeed;
+
+        if (mov.x == 1)
+        {
+            VFX.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (mov.x == -1)
+        {
+            VFX.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
 
 
     }
