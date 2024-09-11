@@ -361,8 +361,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -676967249
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.612985, g: 0.69994, b: 0.8962264, a: 1}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000ebebdefa
+  m_ApplyToSortingLayers: 00000000ebebdefaaf4ca6d7
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2649,6 +2649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1281222915}
   - component: {fileID: 1281222920}
+  - component: {fileID: 1281222921}
   - component: {fileID: 1281222919}
   - component: {fileID: 1281222918}
   m_Layer: 3
@@ -2762,6 +2763,23 @@ MonoBehaviour:
   Left: 97
   Right: 100
   VFX: {fileID: 1246606005}
+--- !u!114 &1281222921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281222914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72a623682e21824fa914c66f5272b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 523264f9b4861e5498a303f0f8ed285e, type: 3}
+  - {fileID: 21300000, guid: 07d59da8f3b2c0543b4dc4f0b8dc1f32, type: 3}
+  sr: {fileID: 1246606007}
+  current_sprite: 0
 --- !u!1 &1301521188
 GameObject:
   m_ObjectHideFlags: 0
@@ -4573,8 +4591,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -676967249
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7264151, g: 0.21586864, b: 0.21586864, a: 1}

@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         shipMovement.EveryFrame();
-        
+
         //Code Due to State
         if (playerState == PlayerState.Boat)
         {
@@ -82,7 +82,7 @@ public class PlayerManager : MonoBehaviour
     //Runs every frame while in the boat state
     void BoatUpdate()
     {
-        
+
         //Ship Movement
         shipMovement.OnFrame();
 
@@ -124,11 +124,14 @@ public class PlayerManager : MonoBehaviour
     {
         playerState = PlayerState.Fishing;
         FMC.ResetMinigame();
+
+        shipMovement.GetComponent<SpriteManager>().current_sprite = 1;
     }
 
     public void StopFishing()
     {
         playerState = PlayerState.Boat;
+        shipMovement.GetComponent<SpriteManager>().current_sprite = 0;
     }
 }
 
