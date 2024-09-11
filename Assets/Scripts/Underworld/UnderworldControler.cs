@@ -18,6 +18,7 @@ public class UnderworldControler : MonoBehaviour
     bool on_ground;
 
     bool do_hit;
+    bool aiming;
 
     public float AttackDistance;
     public Vector2 AttackSize;
@@ -39,8 +40,25 @@ public class UnderworldControler : MonoBehaviour
 
     void Attacks()
     {
+        //Aiming
+        if (aiming)
+        {
+            //slow play movement
+            //TEMP currently nothing
+
+            //Show aim line
+            ShowRodAim();
+
+            //Shoot Projectile
+            if (do_hit)
+            {
+                ShootRod();
+            }
+        }
+
+
         //Melee attack
-        if (do_hit)
+        if (do_hit && !aiming)
         {
 
             foreach (var item in AttackCollider())
@@ -51,6 +69,16 @@ public class UnderworldControler : MonoBehaviour
         }
     }
 
+    void ShowRodAim()
+    {
+        //We want to show a line that would show how to hook is gonna travel when shot
+        //TEMP currently nothing
+    }
+
+    void ShootRod()
+    {
+
+    }
     void MeleeAttack(Enemies enemy)
     {
 
@@ -85,6 +113,9 @@ public class UnderworldControler : MonoBehaviour
 
         //Melee attack
         do_hit = Input.GetKeyDown(Hit_key);
+
+        //Aiming
+        aiming = Input.GetKey(Rod_Reel_Key);
     }
 
     void Movement()
