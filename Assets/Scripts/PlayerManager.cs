@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Refernces")]
     public ShipMovement shipMovement;
     public FishingMinigameControler FMC;
+    public Transform CameraFallowObject;
 
 
 
@@ -39,14 +40,12 @@ public class PlayerManager : MonoBehaviour
     public PlayerState playerState;
 
 
-    Camera cam;
 
     Vector3 camera_watch_positon;
 
     void Awake()
     {
         player = this;
-        cam = Camera.main;
     }
 
     // Start is called before the first frame update
@@ -76,7 +75,7 @@ public class PlayerManager : MonoBehaviour
 
     void CameraMovement()
     {
-        cam.transform.position = new Vector3(camera_watch_positon.x, camera_watch_positon.y + 3.25f, -10);
+        CameraFallowObject.position = new Vector2(camera_watch_positon.x, camera_watch_positon.y + 3.25f);
     }
 
     //Runs every frame while in the boat state
