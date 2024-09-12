@@ -82,14 +82,9 @@ Material:
     - _Time_Scale_Y_2: 0
     - _Time_Scale_Y_3: 0
     - _Water_Transparency: 0.5
-    - _Wave_Height: -0.3
-    - _Wave_Height_2: 0
-    - _Wave_Scale: 0.1
-    - _Wave_Scale_2: 0.2
-    - _Wave_Scale_3: 0.5
-    - _Wave_Size: 0.1
-    - _Wave_Size_2: 0.2
-    - _Wave_Size_3: 0.3
+    - _Wave_Height: -0.47
+    - _Wave_Scale: 0.15
+    - _Wave_Size: 0.42
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
