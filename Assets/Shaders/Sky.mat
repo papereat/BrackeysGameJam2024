@@ -54,8 +54,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cloud_Amount: 0.33
-    - _Cloud_Cutoff: 0.05
-    - _Cloud_Cutoff_Start: 0.33
+    - _Cloud_Cutoff: 0.22
+    - _Cloud_Cutoff_Start: 0.37
     - _Cloud_Sqease: 5.3
     - _Cloud_Strength: 1
     - _EnableExternalAlpha: 0
