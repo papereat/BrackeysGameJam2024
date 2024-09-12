@@ -26,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     public ShipMovement shipMovement;
     public FishingMinigameControler FMC;
     public Transform CameraFallowObject;
+    public Vector3 HookDisplacement;
+
+    public Material HookShader;
 
 
 
@@ -40,7 +43,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerState playerState;
 
 
-
+    [SerializeField]
     Vector3 camera_watch_positon;
 
     void Awake()
@@ -54,6 +57,13 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    void HookShaderUpdate()
+    {
+        Debug.Log("tes");
+        HookShader.SetVector("_Hook_Position", FMC.transform.position);
+        HookShader.SetVector("_Rod_Positon", shipMovement.GetShipPosition() + HookDisplacement);
+        HookShader.SetInt("_No_Show", (playerState == PlayerState.Fishing && (FMC.GoingDown || FMC.GoingUp)) ? 1 : 0);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -71,6 +81,8 @@ public class PlayerManager : MonoBehaviour
 
         //Camera Movement
         CameraMovement();
+
+        HookShaderUpdate();
     }
 
     void CameraMovement()
