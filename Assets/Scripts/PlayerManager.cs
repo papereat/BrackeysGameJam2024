@@ -87,7 +87,7 @@ public class PlayerManager : MonoBehaviour
 
     void CameraMovement()
     {
-        CameraFallowObject.position = new Vector2(camera_watch_positon.x, camera_watch_positon.y + 3.25f);
+        CameraFallowObject.position = new Vector2(camera_watch_positon.x, camera_watch_positon.y + 2.13f);
     }
 
     //Runs every frame while in the boat state

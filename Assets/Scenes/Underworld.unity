@@ -320,8 +320,10 @@ MonoBehaviour:
   Rod_Reel_Key: 101
   ground_collider: {fileID: 739945721}
   on_ground: 0
+  activeProjectile: 0
   AttackDistance: 1
-  HookSpeed: 10
+  HookLength: 3
+  HookSpeed: 3
   AttackSize: {x: 0.5, y: 1}
   HookProjectile: {fileID: 1000149188}
 --- !u!4 &84271031
@@ -892,6 +894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1000149189}
+  - component: {fileID: 1000149192}
   - component: {fileID: 1000149191}
   - component: {fileID: 1000149190}
   m_Layer: 10
@@ -979,6 +982,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1000149192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000149188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9442937c79e8c94f9dc6946c7328796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HookLength: 0
 --- !u!1 &1287599072
 GameObject:
   m_ObjectHideFlags: 0

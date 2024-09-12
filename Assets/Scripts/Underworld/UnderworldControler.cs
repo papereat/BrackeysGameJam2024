@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UnderworldControler : MonoBehaviour
 {
+    public static UnderworldControler player;
     public float WalkSpeed;
     public float JumpForce;
     public KeyCode Left = KeyCode.A, Right = KeyCode.D, Jump = KeyCode.W, Jump2 = KeyCode.Space, Hit_key = KeyCode.Mouse0, Rod_Hit_Key = KeyCode.Mouse1, Rod_Reel_Key = KeyCode.E;
@@ -20,14 +21,19 @@ public class UnderworldControler : MonoBehaviour
 
     bool do_hit;
     bool aiming;
-    bool activeProjectile;
+    public bool activeProjectile;
 
     public float AttackDistance;
+    public float HookLength;
     public float HookSpeed;
     public Vector2 AttackSize;
 
     public GameObject HookProjectile;
 
+    void Awake()
+    {
+        player = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,18 +48,14 @@ public class UnderworldControler : MonoBehaviour
         Movement();
 
         Attacks();
-        
+
     }
 
     void Attacks()
     {
-        if(activeProjectile)
-        {
-            ProjectileCollision();
-        }
 
         //Aiming
-        if (aiming)
+        if (aiming & !activeProjectile)
         {
             //slow play movement
             //TEMP currently nothing
@@ -80,7 +82,7 @@ public class UnderworldControler : MonoBehaviour
             }
         }
 
-        
+
     }
 
     void ShowRodAim()
@@ -98,36 +100,27 @@ public class UnderworldControler : MonoBehaviour
         HookProjectile.transform.position = transform.position;
 
         //Set Velocioty
-        HookProjectile.GetComponent<Rigidbody2D>().velocity = dir;
+        HookProjectile.GetComponent<Rigidbody2D>().velocity = dir * HookSpeed;
+
+        HookProjectile.GetComponent<HookControler>().HookLength = HookLength / HookSpeed;
 
 
         activeProjectile = true;
     }
 
-    void ProjectileCollision()
+    public void ReturnProjectile()
     {
+        HookProjectile.transform.position = new Vector2(1000, 1000);
+        HookProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2();
 
-        if(HookProjectile.GetComponent<Rigidbody2D>().IsTouchingLayers(1 << 7))
-        {
-            HookProjectile.transform.position = new Vector2(1000, 1000);
-            HookProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2();
+        Debug.Log(LayerMask.NameToLayer("Ground"));
 
-            Debug.Log(LayerMask.NameToLayer("Ground"));
-            
-            activeProjectile = false;
-        }
+        activeProjectile = false;
+    }
 
-        if(HookProjectile.GetComponent<Rigidbody2D>().IsTouchingLayers(1 << 8))
-        {
-            HookProjectile.transform.position = new Vector2(1000, 1000);
-            HookProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2();
-
-            Debug.Log(LayerMask.NameToLayer("Ground"));
-            
-            activeProjectile = false;
-
-            //DO damage ShootAttack();
-        }
+    public void HitEnemyProjectile(Enemies enemy)
+    {
+        ShootAttack(enemy);
     }
     void ShootAttack(Enemies enemy)
     {
