@@ -20,11 +20,14 @@ public class UnderworldControler : MonoBehaviour
 
     bool do_hit;
     bool aiming;
+    bool activeProjectile;
 
     public float AttackDistance;
+    public float HookSpeed;
     public Vector2 AttackSize;
 
     public GameObject HookProjectile;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +42,16 @@ public class UnderworldControler : MonoBehaviour
         Movement();
 
         Attacks();
+        
     }
 
     void Attacks()
     {
+        if(activeProjectile)
+        {
+            ProjectileCollision();
+        }
+
         //Aiming
         if (aiming)
         {
@@ -70,6 +79,8 @@ public class UnderworldControler : MonoBehaviour
                 MeleeAttack(item.GetComponent<Enemies>());
             }
         }
+
+        
     }
 
     void ShowRodAim()
@@ -81,13 +92,46 @@ public class UnderworldControler : MonoBehaviour
     void ShootRod()
     {
         //Get direction
-        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized * HookSpeed;
 
         //Teleport Bullet to player
         HookProjectile.transform.position = transform.position;
 
         //Set Velocioty
         HookProjectile.GetComponent<Rigidbody2D>().velocity = dir;
+
+
+        activeProjectile = true;
+    }
+
+    void ProjectileCollision()
+    {
+
+        if(HookProjectile.GetComponent<Rigidbody2D>().IsTouchingLayers(1 << 7))
+        {
+            HookProjectile.transform.position = new Vector2(1000, 1000);
+            HookProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2();
+
+            Debug.Log(LayerMask.NameToLayer("Ground"));
+            
+            activeProjectile = false;
+        }
+
+        if(HookProjectile.GetComponent<Rigidbody2D>().IsTouchingLayers(1 << 8))
+        {
+            HookProjectile.transform.position = new Vector2(1000, 1000);
+            HookProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2();
+
+            Debug.Log(LayerMask.NameToLayer("Ground"));
+            
+            activeProjectile = false;
+
+            //DO damage ShootAttack();
+        }
+    }
+    void ShootAttack(Enemies enemy)
+    {
+        enemy.Damage(20);
     }
     void MeleeAttack(Enemies enemy)
     {

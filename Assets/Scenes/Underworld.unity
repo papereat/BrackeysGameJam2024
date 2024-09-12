@@ -319,7 +319,9 @@ MonoBehaviour:
   Rod_Hit_Key: 324
   Rod_Reel_Key: 101
   ground_collider: {fileID: 739945721}
+  on_ground: 0
   AttackDistance: 1
+  HookSpeed: 10
   AttackSize: {x: 0.5, y: 1}
   HookProjectile: {fileID: 1000149188}
 --- !u!4 &84271031
