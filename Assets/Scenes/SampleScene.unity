@@ -822,8 +822,8 @@ Transform:
   m_GameObject: {fileID: 342120296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9416, y: -14.24, z: 0}
-  m_LocalScale: {x: 119.05463, y: -46.16201, z: 1}
+  m_LocalPosition: {x: 2.9416, y: -49.5277, z: 0}
+  m_LocalScale: {x: 119.05463, y: -116.739105, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2500,7 +2500,8 @@ MonoBehaviour:
   CameraFallowObject: {fileID: 802713619}
   HookDisplacement: {x: -1.727, y: 0.722, z: 0}
   HookShader: {fileID: 2100000, guid: 47034e1f562943748ab8b168f97db9ff, type: 2}
-  playerState: 1
+  playerState: 0
+  camera_watch_positon: {x: 0, y: 0, z: 0}
 --- !u!1 &1171641911
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,7 +4019,7 @@ GameObject:
   - component: {fileID: 1518686737}
   - component: {fileID: 1518686736}
   m_Layer: 0
-  m_Name: Square (6)
+  m_Name: Wire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4085,8 +4086,8 @@ Transform:
   m_GameObject: {fileID: 1518686735}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.4571, y: -4.9911, z: 0}
-  m_LocalScale: {x: 5.7261667, y: 15.647466, z: 1}
+  m_LocalPosition: {x: -7.4571, y: -49.606, z: 0}
+  m_LocalScale: {x: 10.951294, y: 104.87857, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

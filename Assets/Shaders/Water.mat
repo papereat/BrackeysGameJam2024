@@ -72,7 +72,7 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _Foam_Length: 0.25
-    - _Pixelafy_Value: 100
+    - _Pixelafy_Value: 16
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Time_Scale_X: 0.5
@@ -82,9 +82,13 @@ Material:
     - _Time_Scale_Y_2: 0
     - _Time_Scale_Y_3: 0
     - _Water_Transparency: 0.5
-    - _Wave_Height: -0.47
+    - _Wave_Height: -0.38
     - _Wave_Scale: 0.15
-    - _Wave_Size: 0.42
+    - _Wave_Scale_2: 0.89
+    - _Wave_Scale_3: 0
+    - _Wave_Size: 0.7
+    - _Wave_Size_2: 0.45
+    - _Wave_Size_3: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
