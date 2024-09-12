@@ -15,6 +15,7 @@ public class UnderworldControler : MonoBehaviour
 
     float horizontal_inputs;
     bool jump_input;
+    [SerializeField]
     bool on_ground;
 
     bool do_hit;
@@ -22,6 +23,8 @@ public class UnderworldControler : MonoBehaviour
 
     public float AttackDistance;
     public Vector2 AttackSize;
+
+    public GameObject HookProjectile;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +80,14 @@ public class UnderworldControler : MonoBehaviour
 
     void ShootRod()
     {
+        //Get direction
+        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
+        //Teleport Bullet to player
+        HookProjectile.transform.position = transform.position;
+
+        //Set Velocioty
+        HookProjectile.GetComponent<Rigidbody2D>().velocity = dir;
     }
     void MeleeAttack(Enemies enemy)
     {

@@ -75,12 +75,12 @@ Material:
     - _Pixelafy_Value: 16
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Time_Scale_X: 0.14
+    - _Time_Scale_X: -0.21
     - _Time_Scale_Y: 0.93
     - _Water_Transparency: 0.5
-    - _Wave_Height: -0.47
-    - _Wave_Scale: 0.15
-    - _Wave_Size: 0.42
+    - _Wave_Height: -0.57
+    - _Wave_Scale: 1.15
+    - _Wave_Size: 0.54
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
