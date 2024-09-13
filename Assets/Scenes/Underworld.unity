@@ -309,6 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baab220ce0f7c1a4db0c0430611bfc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishingRod:
+    Depth: 0
+    Capacity: 0
+    Power: 0
+  worldManager: {fileID: 1523714877}
   WalkSpeed: 5
   JumpForce: 5
   Left: 97
@@ -322,8 +327,8 @@ MonoBehaviour:
   on_ground: 0
   activeProjectile: 0
   AttackDistance: 1
-  HookLength: 3
-  HookSpeed: 3
+  HookLength: 5
+  HookSpeed: 10
   AttackSize: {x: 0.5, y: 1}
   HookProjectile: {fileID: 1000149188}
 --- !u!4 &84271031
@@ -1079,6 +1084,87 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1523714876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523714878}
+  - component: {fileID: 1523714877}
+  m_Layer: 0
+  m_Name: WorldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1523714877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523714876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06547f653a5c4c48912bc7693e83280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FishSpawnRange: 0
+  Depth:
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  Capacity:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  Power:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+--- !u!4 &1523714878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523714876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.499731, y: 7.764798, z: -0.4269345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1648920525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,3 +1439,4 @@ SceneRoots:
   - {fileID: 84271031}
   - {fileID: 1648920527}
   - {fileID: 396894125}
+  - {fileID: 1523714878}

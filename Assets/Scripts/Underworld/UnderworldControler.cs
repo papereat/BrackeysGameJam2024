@@ -6,6 +6,8 @@ using UnityEngine;
 public class UnderworldControler : MonoBehaviour
 {
     public static UnderworldControler player;
+    public FishingRod fishingRod;
+    public WorldManager worldManager;
     public float WalkSpeed;
     public float JumpForce;
     public KeyCode Left = KeyCode.A, Right = KeyCode.D, Jump = KeyCode.W, Jump2 = KeyCode.Space, Hit_key = KeyCode.Mouse0, Rod_Hit_Key = KeyCode.Mouse1, Rod_Reel_Key = KeyCode.E;
@@ -94,7 +96,7 @@ public class UnderworldControler : MonoBehaviour
     void ShootRod()
     {
         //Get direction
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized * HookSpeed;
+        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
         //Teleport Bullet to player
         HookProjectile.transform.position = transform.position;
@@ -102,7 +104,7 @@ public class UnderworldControler : MonoBehaviour
         //Set Velocioty
         HookProjectile.GetComponent<Rigidbody2D>().velocity = dir * HookSpeed;
 
-        HookProjectile.GetComponent<HookControler>().HookLength = HookLength / HookSpeed;
+        HookProjectile.GetComponent<HookControler>().HookLength = worldManager.Depth[fishingRod.Depth]/ HookSpeed;
 
 
         activeProjectile = true;
