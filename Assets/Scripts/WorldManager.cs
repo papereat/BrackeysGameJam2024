@@ -15,6 +15,8 @@ public class WorldManager : MonoBehaviour
     public float[] Capacity;
     public float[] Power;
 
+    public bool inOverworld;
+
     void Awake()
     {
         wm = this;

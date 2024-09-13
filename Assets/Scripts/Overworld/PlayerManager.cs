@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
     public float Money;
     public float valueOnShip;
     public int day;
-    public float time;
     public FishingRod fishingRod;
 
 

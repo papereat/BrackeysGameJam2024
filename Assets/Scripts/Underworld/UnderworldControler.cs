@@ -29,6 +29,8 @@ public class UnderworldControler : MonoBehaviour
     public float HookLength;
     public float HookSpeed;
     public Vector2 AttackSize;
+    public float Money;
+    public int day;
 
     public GameObject HookProjectile;
 
@@ -93,7 +95,7 @@ public class UnderworldControler : MonoBehaviour
 
     void Death()
     {
-        if(playerHealth <= 0)
+        if (playerHealth <= 0)
         {
             //Do later
         }
@@ -117,7 +119,7 @@ public class UnderworldControler : MonoBehaviour
         //Set Velocioty
         HookProjectile.GetComponent<Rigidbody2D>().velocity = dir * HookSpeed;
 
-        HookProjectile.GetComponent<HookControler>().HookLength = worldManager.Depth[fishingRod.Depth]/ HookSpeed;
+        HookProjectile.GetComponent<HookControler>().HookLength = worldManager.Depth[fishingRod.Depth] / HookSpeed;
 
 
         activeProjectile = true;

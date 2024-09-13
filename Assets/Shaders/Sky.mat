@@ -71,7 +71,7 @@ Material:
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _Sky_Color: {r: 0.5566928, g: 0.7918957, b: 0.8490566, a: 0}
     - _Sun_Color: {r: 1, g: 0.98863345, b: 0.8820755, a: 0}
-    - _Sun_Position: {r: 0.52, g: 0.35, b: 0, a: 0}
+    - _Sun_Position: {r: 0.5, g: 0.08995694, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6612552924969876135
 MonoBehaviour:
