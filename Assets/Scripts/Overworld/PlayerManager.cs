@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
     void HookShaderUpdate()
     {
         HookShader.SetVector("_Hook_Position", FMC.transform.position);
-        HookShader.SetVector("_Rod_Positon", shipMovement.GetShipPosition() + HookDisplacement);
+        HookShader.SetVector("_Rod_Positon", shipMovement.GetShipPosition() + new Vector3(HookDisplacement.x * (shipMovement.VFX.GetComponent<SpriteRenderer>().flipX ? -1 : 1), HookDisplacement.y, HookDisplacement.z));
         HookShader.SetInt("_No_Show", (playerState == PlayerState.Fishing && (FMC.GoingDown || FMC.GoingUp)) ? 1 : 0);
     }
     // Update is called once per frame

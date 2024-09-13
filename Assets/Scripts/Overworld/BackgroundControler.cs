@@ -15,8 +15,6 @@ public class BackgroundControler : MonoBehaviour
 
     public Gradient SunColor;
     public Gradient CloudColor;
-    public Gradient DaySkyColor;
-    public Gradient NightSkyColor;
     public Gradient SkyColorLerpFunction;
 
     DayCyleControler dcc;
@@ -46,8 +44,8 @@ public class BackgroundControler : MonoBehaviour
         BackgroundMaterial.SetColor("_Cloud_Color", CloudColor.Evaluate(dcc.time / dcc.DayLength));
 
         //Sky Color
-        //Temp Not set yet
-        //BackgroundMaterial.Se("_Cloud_Color", Color.Lerp());
+        //Change the sky color gradients in the default values for the night and day sky gradients i nthe shader
+        BackgroundMaterial.SetFloat("_Sky_Gradient_Lerp_Function", SkyColorLerpFunction.Evaluate(dcc.time / dcc.DayLength).r);
 
     }
 }

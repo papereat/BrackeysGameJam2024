@@ -45,6 +45,8 @@ public class FishingMinigameControler : MonoBehaviour
     Rigidbody2D rb;
     WorldManager wm;
 
+    bool upies;
+
     float x_location;
     // Start is called before the first frame update
     void Start()
@@ -81,7 +83,7 @@ public class FishingMinigameControler : MonoBehaviour
         {
             GoingUpCode();
         }
-        else if(DoingFishBar)
+        else if (DoingFishBar)
         {
             FishBarCode();
         }
@@ -89,8 +91,10 @@ public class FishingMinigameControler : MonoBehaviour
 
     public void OnSurfaceCode()
     {
+        upies = false;
+
         GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
-        
+
         transform.position = player.shipMovement.GetShipPosition();
         x_location = transform.position.x;
 
@@ -114,7 +118,7 @@ public class FishingMinigameControler : MonoBehaviour
             FishingUI.GetComponent<Canvas>().enabled = true;
             DoingFishBar = true;
             OnSurface = false;
-            
+
         }
 
 
@@ -125,7 +129,7 @@ public class FishingMinigameControler : MonoBehaviour
         FishBarTime = Mathf.PingPong(Time.time, 1);
         FishingUI.transform.GetChild(0).GetComponent<Scrollbar>().value = FishBarTime;
 
-        if(Input.GetKeyDown(FishKey))
+        if (Input.GetKeyDown(FishKey))
         {
             FishingUI.GetComponent<Canvas>().enabled = false;
             FishBarTime = (1 - 4 * Mathf.Pow((FishBarTime - 0.5f), 2));
@@ -175,27 +179,33 @@ public class FishingMinigameControler : MonoBehaviour
         //Move to mouse position
         //Eventually we will repalce this with smth smother prob a lerp
         transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, transform.position.z);
-        
+
         //Move Up
         rb.velocity = new Vector2(0, 1) * GoingUpSpeed * GoingUpSpeedMultiplier;
 
         //Presses Key To Speeed Up Going Up
         if (Input.GetKeyDown(GoUpKey) || atCapacity())
         {
-            //Eventually replace this with an animation of the hook going toward the middle and going to the ship
+            Debug.Log("fars");
+
             StartCoroutine(AccelerateHook(10, 1));
         }
     }
-    
+
     //Makes the hook accelerate upward
     IEnumerator AccelerateHook(float endSpeed, float timetillAccelerate)
     {
-        float t = 0;
-        while(GoingUp)
+        if (!upies)
         {
-            GoingUpSpeedMultiplier = Mathf.Lerp(1, endSpeed, t);
-            t += Time.deltaTime / timetillAccelerate;
-            yield return new WaitForEndOfFrame();
+            upies = true;
+            float t = 0;
+            while (GoingUp)
+            {
+                GoingUpSpeedMultiplier = Mathf.Lerp(1, endSpeed, t);
+                t += Time.deltaTime / timetillAccelerate;
+                yield return new WaitForEndOfFrame();
+            }
+
         }
 
     }
