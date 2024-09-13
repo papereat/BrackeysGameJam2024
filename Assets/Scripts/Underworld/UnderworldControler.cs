@@ -32,6 +32,8 @@ public class UnderworldControler : MonoBehaviour
 
     public GameObject HookProjectile;
 
+    public float playerHealth = 50f;
+
     void Awake()
     {
         player = this;
@@ -50,6 +52,8 @@ public class UnderworldControler : MonoBehaviour
         Movement();
 
         Attacks();
+
+        Death();
 
     }
 
@@ -87,6 +91,15 @@ public class UnderworldControler : MonoBehaviour
 
     }
 
+    void Death()
+    {
+        if(playerHealth <= 0)
+        {
+            //Do later
+        }
+
+    }
+
     void ShowRodAim()
     {
         //We want to show a line that would show how to hook is gonna travel when shot
@@ -118,6 +131,8 @@ public class UnderworldControler : MonoBehaviour
         Debug.Log(LayerMask.NameToLayer("Ground"));
 
         activeProjectile = false;
+
+        HookProjectile.GetComponent<HookControler>().IDsHit.Clear();
     }
 
     public void HitEnemyProjectile(Enemies enemy)
@@ -126,12 +141,16 @@ public class UnderworldControler : MonoBehaviour
     }
     void ShootAttack(Enemies enemy)
     {
-        enemy.Damage(20);
+        enemy.Damage(10 * worldManager.Power[fishingRod.Power]);
     }
     void MeleeAttack(Enemies enemy)
     {
+        enemy.Damage(5 * worldManager.Power[fishingRod.Power]);
+    }
 
-        enemy.Damage(5);
+    public void Damage(float DamageAmount)
+    {
+        playerHealth -= DamageAmount;
     }
 
     void MovementInputs()
