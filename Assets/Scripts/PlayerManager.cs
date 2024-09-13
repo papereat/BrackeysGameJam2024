@@ -59,7 +59,6 @@ public class PlayerManager : MonoBehaviour
 
     void HookShaderUpdate()
     {
-        Debug.Log("tes");
         HookShader.SetVector("_Hook_Position", FMC.transform.position);
         HookShader.SetVector("_Rod_Positon", shipMovement.GetShipPosition() + HookDisplacement);
         HookShader.SetInt("_No_Show", (playerState == PlayerState.Fishing && (FMC.GoingDown || FMC.GoingUp)) ? 1 : 0);
