@@ -11,6 +11,7 @@ public class SettingsController : MonoBehaviour
 
     public Slider soundSlider;
     public Slider musicSlider;
+    public KeyCode settingsKey = KeyCode.Escape;
     void Awake()
     {
         settingsController = this;
@@ -18,6 +19,14 @@ public class SettingsController : MonoBehaviour
     void Start()
     {
         soundController = SoundController.soundController;
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(settingsKey))
+        {
+            soundController.playOverSound(11, 1);
+            SettingsMenu.SetActive(!SettingsMenu.activeSelf);
+        }
     }
     public void SettingsNBack()
     {
