@@ -23,7 +23,18 @@ public class Enemies : MonoBehaviour
 
     public float jumpRate = 1f;
     private float jumpTime = 0f;
-    
+
+    public StateAnimator stateAnimator;
+
+    public float AttackDuration;
+
+    bool attacking;
+
+    bool do_move_anim;
+
+    bool look_left;
+
+
     void Start()
     {
         player = UnderworldControler.player;
@@ -36,11 +47,50 @@ public class Enemies : MonoBehaviour
     {
         attackTime -= Time.deltaTime;
         jumpTime -= Time.deltaTime;
-        
+
         Movement();
         AttackPlayer();
 
+        Animations();
+
         Death();
+    }
+
+    void Animations()
+    {
+        stateAnimator.GetComponent<SpriteRenderer>().flipX = look_left;
+        if (attacking)
+        {
+            if (stateAnimator.CurrentState != "Attack")
+            {
+                stateAnimator.left = false;
+                stateAnimator.SwitchState("Attack");
+            }
+        }
+        else if (!on_ground)
+        {
+            if (stateAnimator.CurrentState != "Jump")
+            {
+                stateAnimator.left = false;
+                stateAnimator.SwitchState("Jump");
+            }
+        }
+        else if (do_move_anim)
+        {
+            if (stateAnimator.CurrentState != "Walk")
+            {
+                stateAnimator.left = false;
+                stateAnimator.SwitchState("Walk");
+            }
+        }
+        else
+        {
+            if (stateAnimator.CurrentState != "Idle")
+            {
+                stateAnimator.left = false;
+                stateAnimator.SwitchState("Idle");
+            }
+        }
     }
     public void Damage(float DamageAmount)
     {
@@ -50,11 +100,14 @@ public class Enemies : MonoBehaviour
     }
 
     void Movement()
-    {   
+    {
+        //Check if enenmy shoud move
+        do_move_anim = true;
+
         //Moving the Enemy    
         Vector2 direction = (player.transform.position - transform.position).normalized;
         //transform.position += (Vector3)direction * enemySpeed * Time.deltaTime;
-        
+
         rb.velocity = new Vector2(direction.x * enemySpeed, rb.velocity.y);
 
         //switches sprite direction depending on direction
@@ -76,7 +129,7 @@ public class Enemies : MonoBehaviour
             jumpTime = jumpRate;
         }
     }
-    
+
     void OnTriggerEnter2D(Collider2D col)
     {
         on_ground = true;
@@ -90,16 +143,23 @@ public class Enemies : MonoBehaviour
 
     public void AttackPlayer()
     {
-        
-        if(attackTime <= 0 && playerDistance() < 3)
+
+        if (attackTime <= 0 && playerDistance() < 3 & on_ground)
         {
+            StartCoroutine(AttackMelee());
             foreach (var item in AttackCollider())
             {
                 MeleeAttack(item.GetComponent<Enemies>());
             }
-            
+
             attackTime = attackSpeed;
         }
+    }
+    IEnumerator AttackMelee()
+    {
+        attacking = true;
+        yield return new WaitForSeconds(AttackDuration);
+        attacking = false;
     }
     float playerDistance()
     {
@@ -111,7 +171,7 @@ public class Enemies : MonoBehaviour
     }
     void Death()
     {
-        if(Health <= 0)
+        if (Health <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -132,5 +192,5 @@ public class Enemies : MonoBehaviour
     {
         return transform.position.x <= player.transform.position.x;
     }
-    
+
 }

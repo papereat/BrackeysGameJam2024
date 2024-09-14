@@ -7,10 +7,13 @@ public class HookControler : MonoBehaviour
     public float HookLength;
     UnderworldControler player;
     public List<int> IDsHit;
-    
+
+    WorldManager wm;
+
     // Start is called before the first frame update
     void Start()
     {
+        wm = WorldManager.wm;
         player = UnderworldControler.player;
     }
 
@@ -35,16 +38,16 @@ public class HookControler : MonoBehaviour
         if (col.gameObject.layer == 8 && !IDsHit.Contains(col.GetComponent<Enemies>().id))
         {
             IDsHit.Add(col.GetComponent<Enemies>().id);
-            
+
             player.HitEnemyProjectile(col.GetComponent<Enemies>());
-            
-            if(player.worldManager.Capacity[player.fishingRod.Capacity] >= Random.Range(0.0f, 1.0f))
+
+            if (wm.Capacity[player.fishingRod.Capacity] >= Random.Range(0.0f, 1.0f))
             {
                 return;
             }
 
             player.ReturnProjectile();
-        }       
+        }
         else
         {
             player.ReturnProjectile();

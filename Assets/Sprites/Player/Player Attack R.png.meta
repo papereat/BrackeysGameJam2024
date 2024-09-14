@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d904338c0d75304b9539de336aa535c
+guid: 2f712013e984c8d40bb603cde88570fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,28 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player Walk Right_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 283514d28bfb0184d9a13e5a5c1e5ab2
-      internalID: -103189314
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Walk Right_0
+      name: Player Attack R_0
       rect:
         serializedVersion: 2
         x: 0
@@ -145,14 +124,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5edb031cbb8795d49b8c307efb120d76
-      internalID: -620455190
+      spriteID: 703ccddac96b1c94396d68d7cd38e7a7
+      internalID: 1564091956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Walk Right_2
+      name: Player Attack R_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26463770eb132aa43abe47ceac955eeb
+      internalID: -1455979359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Attack R_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,29 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ecfc194d61dcdb4e83f197d509eb14f
-      internalID: 1213155110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Walk Right_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 486413ae4b3f35f4586074efaaefc83c
-      internalID: -539575317
+      spriteID: b2fe60dfdb846634aac76d8bea81b5da
+      internalID: -239434770
       vertices: []
       indices: 
       edges: []
@@ -204,10 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player Walk Right_0: -620455190
-      Player Walk Right_1: -103189314
-      Player Walk Right_2: 1213155110
-      Player Walk Right_3: -539575317
+      Player Attack R_0: 1564091956
+      Player Attack R_1: -1455979359
+      Player Attack R_2: -239434770
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

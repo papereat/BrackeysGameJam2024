@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using TMPro;
+using Unity.Burst.Intrinsics;
+
+
 
 public class UnderworldControler : MonoBehaviour
 {
     public static UnderworldControler player;
+    public StateAnimator stateAnimator;
     public FishingRod fishingRod;
-    public WorldManager worldManager;
+    WorldManager worldManager;
     public float WalkSpeed;
     public float JumpForce;
     public KeyCode Left = KeyCode.A, Right = KeyCode.D, Jump = KeyCode.W, Jump2 = KeyCode.Space, Hit_key = KeyCode.Mouse0, Rod_Hit_Key = KeyCode.Mouse1, Rod_Reel_Key = KeyCode.E;
@@ -32,9 +36,24 @@ public class UnderworldControler : MonoBehaviour
     public float Money;
     public int day;
 
+    float JumpAnimTime;
+
     public GameObject HookProjectile;
 
     public float playerHealth = 50f;
+
+    bool attacking;
+    bool do_jump_anim;
+    bool do_move_anim;
+    bool right_anim;
+
+    public float attackTime;
+    public GameObject OuchyText;
+    public Vector2 OuchySpawnDisplacement;
+    public float ouchyRotationDisplacement;
+    public float OuchyTime;
+    public Vector3 OuchySpot;
+    public Vector2 OuchyRotation;
 
     void Awake()
     {
@@ -45,6 +64,7 @@ public class UnderworldControler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        worldManager = WorldManager.wm;
     }
 
     // Update is called once per frame
@@ -53,17 +73,103 @@ public class UnderworldControler : MonoBehaviour
         MovementInputs();
         Movement();
 
+
+
         Attacks();
 
         Death();
 
-    }
+        Animations();
 
+    }
+    void Animations()
+    {
+        if (activeProjectile)
+        {
+            if (right_anim)
+            {
+                if (stateAnimator.CurrentState != "ThrowR")
+                {
+                    stateAnimator.left = false;
+                    stateAnimator.SwitchState("ThrowR");
+                }
+            }
+            else if (stateAnimator.CurrentState != "ThrowL")
+            {
+                stateAnimator.left = true;
+                stateAnimator.SwitchState("ThrowL");
+            }
+        }
+        else if (attacking)
+        {
+            if (right_anim)
+            {
+                if (stateAnimator.CurrentState != "AttackR")
+                {
+                    stateAnimator.left = false;
+                    stateAnimator.SwitchState("AttackR");
+                }
+            }
+            else if (stateAnimator.CurrentState != "AttackL")
+            {
+                stateAnimator.left = true;
+                stateAnimator.SwitchState("AttackL");
+            }
+        }
+        else if (do_jump_anim)
+        {
+            if (right_anim)
+            {
+                if (stateAnimator.CurrentState != "JumpR")
+                {
+                    stateAnimator.left = false;
+                    stateAnimator.SwitchState("JumpR");
+                }
+            }
+            else if (stateAnimator.CurrentState != "JumpL")
+            {
+                stateAnimator.left = true;
+                stateAnimator.SwitchState("JumpL");
+            }
+        }
+        else if (do_move_anim)
+        {
+            if (right_anim)
+            {
+                if (stateAnimator.CurrentState != "WalkR")
+                {
+                    stateAnimator.left = false;
+                    stateAnimator.SwitchState("WalkR");
+                }
+            }
+            else if (stateAnimator.CurrentState != "WalkL")
+            {
+                stateAnimator.left = true;
+                stateAnimator.SwitchState("WalkL");
+            }
+        }
+        else
+        {
+            if (right_anim)
+            {
+                if (stateAnimator.CurrentState != "IdleR")
+                {
+                    stateAnimator.left = false;
+                    stateAnimator.SwitchState("IdleR");
+                }
+            }
+            else if (stateAnimator.CurrentState != "IdleL")
+            {
+                stateAnimator.left = true;
+                stateAnimator.SwitchState("IdleL");
+            }
+        }
+    }
     void Attacks()
     {
 
         //Aiming
-        if (aiming & !activeProjectile)
+        if (aiming & !activeProjectile & on_ground & !attacking)
         {
             //slow play movement
             //TEMP currently nothing
@@ -80,9 +186,9 @@ public class UnderworldControler : MonoBehaviour
 
 
         //Melee attack
-        if (do_hit && !aiming)
+        if (do_hit & !aiming & !attacking & on_ground)
         {
-
+            StartCoroutine(AttackMelee());
             foreach (var item in AttackCollider())
             {
 
@@ -150,9 +256,33 @@ public class UnderworldControler : MonoBehaviour
         enemy.Damage(5 * worldManager.Power[fishingRod.Power]);
     }
 
+    IEnumerator AttackMelee()
+    {
+        attacking = true;
+        yield return new WaitForSeconds(attackTime);
+        attacking = false;
+    }
+
     public void Damage(float DamageAmount)
     {
         playerHealth -= DamageAmount;
+
+        StartCoroutine(OuchyEffect());
+    }
+
+    IEnumerator OuchyEffect()
+    {
+        GameObject OuchyObject = Instantiate(OuchyText, transform.position + OuchySpot + new Vector3(Random.Range(-OuchySpawnDisplacement.x, OuchySpawnDisplacement.x), Random.Range(-OuchySpawnDisplacement.y, OuchySpawnDisplacement.y), -1), new Quaternion());
+        OuchyObject.transform.eulerAngles = new Vector3(0, 0, Random.Range(-ouchyRotationDisplacement, ouchyRotationDisplacement));
+
+        OuchyObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        OuchyObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        yield return new WaitForSeconds(OuchyTime);
+        OuchyObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+        OuchyObject.GetComponent<Rigidbody2D>().AddTorque(Random.Range(OuchyRotation.x, OuchyRotation.y));
+        yield return new WaitForSeconds(10);
+        Destroy(OuchyObject);
+
     }
 
     void MovementInputs()
@@ -188,15 +318,31 @@ public class UnderworldControler : MonoBehaviour
         aiming = Input.GetKey(Rod_Reel_Key);
     }
 
+
     void Movement()
     {
         //Horizontal
+        //reset horizontal velocity
+        rb.velocity = new Vector2(0, rb.velocity.y);
         //Checks if can move 
-        //Currenlty this is always true
-        rb.velocity = new Vector2(horizontal_inputs * WalkSpeed, rb.velocity.y);
+        if (!activeProjectile && !attacking)
+        {
+            if (horizontal_inputs == 1)
+            {
+                right_anim = true;
+            }
+            else if (horizontal_inputs == -1)
+            {
+                right_anim = false;
+            }
+
+            do_move_anim = horizontal_inputs != 0;
+            rb.velocity = new Vector2(horizontal_inputs * WalkSpeed, rb.velocity.y);
+        }
+
 
         //Jump
-        if (on_ground && jump_input)
+        if (on_ground && jump_input && !activeProjectile && !attacking)
         {
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
@@ -209,11 +355,14 @@ public class UnderworldControler : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         on_ground = true;
+        do_jump_anim = false;
+
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         on_ground = false;
+        do_jump_anim = true;
     }
 
 
