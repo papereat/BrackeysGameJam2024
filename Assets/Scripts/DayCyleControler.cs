@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayCyleControler : MonoBehaviour
 {
@@ -13,15 +14,22 @@ public class DayCyleControler : MonoBehaviour
     public int OpenHoleDay;
     public Vector2 HoleSize;
     public Vector2 timeToFillHole;
+    public float timeTillStartFadeToBlack;
+    public float FadeToBlackTime;
+    public float timeInFadeToBlackBeforeScreenTransition;
+    public float timeTillGravity;
+    public float Gravity;
 
 
     public Material waterMaterial;
+    public Image FadeToBlackImage;
 
     bool holeOpened = false;
 
     SaveManager sm;
     PlayerManager player;
     WorldManager wm;
+    SceneControler sceneControler;
 
     void Awake()
     {
@@ -33,6 +41,7 @@ public class DayCyleControler : MonoBehaviour
         sm = SaveManager.sm;
         player = PlayerManager.player;
         wm = WorldManager.wm;
+        sceneControler = SceneControler.sc;
 
         ResetHole();
     }
@@ -61,17 +70,22 @@ public class DayCyleControler : MonoBehaviour
     {
         holeOpened = true;
 
-        waterMaterial.SetFloat("_Hole_Position", player.);
+
 
         //Tell Player To Stop Moving
         NoMovePlayer();
+
+        waterMaterial.SetFloat("_Hole_Position", player.GetCurrentPosition().x);
 
         //Water To start Opening Up the Water
         StartCoroutine(WaterOpen());
 
         //Start Coroutine to wait a few seconds then make player fall
+        StartCoroutine(PlayerFall());
+
 
         //Start coroutine to wait a ffew seconds then start fade to black and once faded to black switch scene
+        StartCoroutine(FadeToBlack());
 
     }
 
@@ -105,9 +119,33 @@ public class DayCyleControler : MonoBehaviour
         }
     }
 
-    void PlayerFall() { }
+    IEnumerator PlayerFall()
+    {
+        yield return new WaitForSeconds(timeTillGravity);
+        player.shipMovement.GetComponent<Rigidbody2D>().gravityScale = Gravity;
+    }
 
-    void FadeToBlack() { }
+    IEnumerator FadeToBlack()
+    {
+        yield return new WaitForSeconds(timeTillStartFadeToBlack);
+        float time = 0;
+        while (true)
+        {
+            FadeToBlackImage.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, time / FadeToBlackTime));
+
+            if (time >= FadeToBlackTime)
+            {
+                break;
+            }
+
+            time += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(timeInFadeToBlackBeforeScreenTransition);
+        //sm.CollectData();
+        //sm.WriteData();
+        sceneControler.LoadScene(2);
+    }
 
     void PromptEndDay()
     {

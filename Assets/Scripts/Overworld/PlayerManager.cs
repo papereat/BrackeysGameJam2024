@@ -48,6 +48,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     Vector3 camera_watch_positon;
 
+    bool inHole = false;
+
     void Awake()
     {
         player = this;
@@ -66,6 +68,7 @@ public class PlayerManager : MonoBehaviour
     {
         shipMovement.EveryFrame();
 
+
         //Code Due to State
         if (playerState == PlayerState.Boat)
         {
@@ -75,6 +78,7 @@ public class PlayerManager : MonoBehaviour
         {
             FishingUpdate();
         }
+
 
         //Camera Movement
         CameraMovement();
@@ -86,7 +90,8 @@ public class PlayerManager : MonoBehaviour
 
     public void StartHoleEffect()
     {
-
+        playerState = PlayerState.Boat;
+        inHole = true;
     }
 
     void CameraMovement()
@@ -97,9 +102,12 @@ public class PlayerManager : MonoBehaviour
     //Runs every frame while in the boat state
     void BoatUpdate()
     {
+        if (!inHole)
+        {
+            //Ship Movement
+            shipMovement.OnFrame();
+        }
 
-        //Ship Movement
-        shipMovement.OnFrame();
 
 
         //Camera movemenmt

@@ -48,12 +48,17 @@ public class UnderworldControler : MonoBehaviour
     bool right_anim;
 
     public float attackTime;
+    [Header("Ouchy")]
     public GameObject OuchyText;
     public Vector2 OuchySpawnDisplacement;
     public float ouchyRotationDisplacement;
     public float OuchyTime;
     public Vector3 OuchySpot;
     public Vector2 OuchyRotation;
+
+    [Header("Hook Shader")]
+    public Material HookShader;
+    public Vector3 HookDisplacement;
 
     void Awake()
     {
@@ -80,7 +85,14 @@ public class UnderworldControler : MonoBehaviour
         Death();
 
         Animations();
+        HookShaderUpdate();
 
+    }
+    void HookShaderUpdate()
+    {
+        HookShader.SetVector("_Hook_Position", HookProjectile.transform.position);
+        HookShader.SetVector("_Rod_Positon", transform.position + new Vector3(HookDisplacement.x * (right_anim ? 1 : -1), HookDisplacement.y, HookDisplacement.z));
+        HookShader.SetInt("_No_Show", activeProjectile ? 1 : 0);
     }
     void Animations()
     {
@@ -220,7 +232,7 @@ public class UnderworldControler : MonoBehaviour
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
         //Teleport Bullet to player
-        HookProjectile.transform.position = transform.position;
+        HookProjectile.transform.position = transform.position + new Vector3(HookDisplacement.x * (right_anim ? 1 : -1), HookDisplacement.y, HookDisplacement.z);
 
         //Set Velocioty
         HookProjectile.GetComponent<Rigidbody2D>().velocity = dir * HookSpeed;

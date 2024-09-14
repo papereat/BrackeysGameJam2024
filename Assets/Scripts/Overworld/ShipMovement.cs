@@ -63,7 +63,7 @@ public class ShipMovement : MonoBehaviour
         }
 
 
-        rb.velocity = mov * movementSpeed;
+        rb.velocity = new Vector2(mov.x * movementSpeed, rb.velocity.y);
 
         if (mov.x == 1)
         {
@@ -86,7 +86,7 @@ public class ShipMovement : MonoBehaviour
 
     public void EveryFrame()
     {
-        rb.velocity = new Vector2();
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     public Vector3 GetShipPosition()
