@@ -17,6 +17,12 @@ public class WorldManager : MonoBehaviour
 
     public bool inOverworld;
 
+    [Header("Animation Settings")]
+    public float framesPerSecond;
+    public int currentFrame;
+
+    float time;
+
     void Awake()
     {
         wm = this;
@@ -30,6 +36,8 @@ public class WorldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
 
+        currentFrame = Mathf.FloorToInt(time * framesPerSecond);
     }
 }
