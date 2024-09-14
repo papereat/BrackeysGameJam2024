@@ -84,6 +84,11 @@ public class PlayerManager : MonoBehaviour
         GeneralUI.transform.GetChild(2).GetComponent<TMP_Text>().text = "Day " + day + "\n " + dayWeek[day];
     }
 
+    public void StartHoleEffect()
+    {
+
+    }
+
     void CameraMovement()
     {
         CameraFallowObject.position = new Vector2(camera_watch_positon.x, camera_watch_positon.y + 2.13f);
