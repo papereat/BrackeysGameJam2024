@@ -62,12 +62,12 @@ Material:
     - _EnableExternalAlpha: 0
     - _Pixelafy_Value: 128
     - _Screen_Ratio: 1.777778
-    - _Sky_Gradient_Lerp_Function: 0.6423057
+    - _Sky_Gradient_Lerp_Function: 0.06197636
     - _Sun_Size: 0.025
     - _cloud_size: 7.5
     - _inHell: 0
     m_Colors:
-    - _BloomColor: {r: 0.97576207, g: 0.82869864, b: 0.79082507, a: 1}
+    - _BloomColor: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Time_Scale: {r: -0.001, g: -0.0001, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
