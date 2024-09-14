@@ -19,7 +19,11 @@ public class ShopInteractible : LocationInteractableComponent
     {
         soundController = SoundController.soundController;
 
-        Debug.Log("WORKED");
+        if(!ShopUI.GetComponent<Canvas>().enabled)
+        {
+            soundController.playOverSound(8, 0.5f);
+        }
+        
         ShopUI.GetComponent<Canvas>().enabled = !ShopUI.GetComponent<Canvas>().enabled;
         GeneralUI.GetComponent<Canvas>().enabled = !GeneralUI.GetComponent<Canvas>().enabled;
 

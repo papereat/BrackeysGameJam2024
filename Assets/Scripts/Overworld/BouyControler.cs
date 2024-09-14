@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BouyControler : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    public Transform rb;
 
     public float WaterRange;
     public float WaterHeight;
@@ -33,7 +33,7 @@ public class BouyControler : MonoBehaviour
     {
         float point_a = waterHeight(0);
         float point_b = waterHeight(SampleDistance);
-        rb.transform.position = new Vector3(rb.transform.position.x, (point_a + point_b) / 2f, rb.transform.position.z);
+        rb.transform.localPosition = new Vector3(rb.transform.localPosition.x, (point_a + point_b) / 2f, rb.transform.localPosition.z);
 
         rb.transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * GetAngle(new Vector2(0, point_a), new Vector2(SampleDistance, point_b)));
 

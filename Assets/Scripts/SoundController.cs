@@ -8,6 +8,7 @@ public class SoundController : MonoBehaviour
     public static SoundController soundController;
     public AudioSource overSoundSrc;
     public AudioSource underSoundSrc;
+    public AudioSource boatSoundSrc;
     public AudioSource musicSrc;
     public AudioClip[] sounds;
 
@@ -15,6 +16,7 @@ public class SoundController : MonoBehaviour
     public float musicVolume;
     public float playerOverStateVolume;
     public float playerUnderStateVolume;
+    public float boatStateVolume;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class SoundController : MonoBehaviour
     {
         overSoundSrc.volume = settingVolume * playerOverStateVolume;
         underSoundSrc.volume = settingVolume * playerUnderStateVolume;
+        boatSoundSrc.volume = settingVolume * boatStateVolume;
         musicSrc.volume = musicVolume;
     }
 
@@ -40,6 +43,11 @@ public class SoundController : MonoBehaviour
     {
         
         underSoundSrc.PlayOneShot(sounds[soundIndex], soundVolume);
+    }
+    public void playBoatSound(int soundIndex, float soundVolume)
+    {
+        
+        boatSoundSrc.PlayOneShot(sounds[soundIndex], soundVolume);
     }
     
     public void playMusic(int soundIndex)
