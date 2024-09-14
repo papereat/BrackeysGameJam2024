@@ -62,7 +62,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _Pixelafy_Value: 128
     - _Screen_Ratio: 1.777778
-    - _Sky_Gradient_Lerp_Function: 0.055773575
+    - _Sky_Gradient_Lerp_Function: 0.09571919
     - _Sun_Size: 0.025
     - _cloud_size: 7.5
     - _inHell: 0
