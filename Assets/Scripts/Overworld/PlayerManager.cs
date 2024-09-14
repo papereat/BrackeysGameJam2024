@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
     //This bascily makes it so that in you can just do PlayerManager.player to get a refercne to the player object
     public static PlayerManager player;
+    public GameObject GeneralUI;
 
 
 
@@ -14,7 +16,8 @@ public class PlayerManager : MonoBehaviour
     [Header("Stats")]
     public float Money;
     public float valueOnShip;
-    public int day;
+    public int day = 1;
+    public string[] dayWeek;
     public FishingRod fishingRod;
 
 
@@ -51,10 +54,6 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     void HookShaderUpdate()
     {
@@ -81,6 +80,8 @@ public class PlayerManager : MonoBehaviour
         CameraMovement();
 
         HookShaderUpdate();
+
+        GeneralUI.transform.GetChild(2).GetComponent<TMP_Text>().text = "Day " + day + "\n " + dayWeek[day];
     }
 
     void CameraMovement()

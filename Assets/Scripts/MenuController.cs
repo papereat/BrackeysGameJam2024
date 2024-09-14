@@ -5,8 +5,14 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     public GameObject MainMenu;
+    public GameObject Letter;
     public GameObject SettingsMenu;
     public void NewGame()
+    {
+        MainMenu.GetComponent<Canvas>().enabled = !MainMenu.GetComponent<Canvas>().enabled;
+        Letter.GetComponent<Canvas>().enabled = !Letter.GetComponent<Canvas>().enabled;
+    }
+    public void Next()
     {
         GetComponent<SaveManager>().ResetData();
         GetComponent<SceneControler>().LoadScene(1);

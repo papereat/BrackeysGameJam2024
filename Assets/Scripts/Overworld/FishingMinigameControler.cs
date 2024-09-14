@@ -269,6 +269,7 @@ public class FishingMinigameControler : MonoBehaviour
     {
         if (!atCapacity())
         {
+            soundController.playUnderSound(9, 1);
             //Collect fish
             FishCollected += 1;
             fishValue += fish.value;

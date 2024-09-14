@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
+    SoundController soundController;
+
     [SerializeField] float movementSpeed = 1f;
     [SerializeField] KeyCode Left = KeyCode.A;
     [SerializeField] KeyCode Right = KeyCode.D;
@@ -13,6 +16,9 @@ public class ShipMovement : MonoBehaviour
     //Refernce to the Rigidbody
     Rigidbody2D rb;
 
+    float movingIncrease;
+    public float changeTime;
+
     //Awake Functions Run Before the start function
     //Only use awake function for setting references and controling things inside this object
     //Dont try to use functions in other objects cus they wont work in awake instead use Start
@@ -20,23 +26,40 @@ public class ShipMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    
+    void Start()
+    {
+        soundController = SoundController.soundController;
+        
+        StartCoroutine(BoatSounds(0));
+    }
+
+    IEnumerator BoatSounds(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        soundController.playBoatSound(10, 1);
+        StartCoroutine(BoatSounds(soundController.sounds[10].length));
+    }
 
     //Runs Everyframe while boat
     public void OnFrame()
-    {
-
+    {        
+        soundController.boatStateVolume = 0.1f;
         Vector2 mov = new Vector2();
+
         if (Input.GetKey(Left))
         {
+            movingIncrease += Time.deltaTime / changeTime;
+            
             mov.x -= 1;
-
         }
         if (Input.GetKey(Right))
         {
+            movingIncrease += Time.deltaTime / changeTime;
+            
             mov.x += 1;
-
         }
-
 
 
         rb.velocity = mov * movementSpeed;
@@ -49,9 +72,16 @@ public class ShipMovement : MonoBehaviour
         {
             VFX.GetComponent<SpriteRenderer>().flipX = false;
         }
+        else
+        {
+            movingIncrease -= Time.deltaTime / changeTime;  
+        }
 
+        movingIncrease = Mathf.Clamp(movingIncrease, 0, 1);
 
+        soundController.boatStateVolume = Mathf.Lerp(0.1f, 0.35f, movingIncrease);
 
+        Debug.Log(movingIncrease);
     }
 
     public void EveryFrame()
