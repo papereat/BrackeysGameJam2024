@@ -1024,6 +1024,7 @@ MonoBehaviour:
   - 0
   - 0
   inOverworld: 1
+  inMenu: 0
   framesPerSecond: 0
   currentFrame: 0
 --- !u!114 &337379902
@@ -1046,7 +1047,10 @@ MonoBehaviour:
     Capacity: 0
     Power: 0
     inOverworld: 0
+    soundVolume: 0
+    musicVolume: 0
   saveName: save
+  isMenu: 0
 --- !u!4 &337379903
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,8 +1106,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 94207592331f716439f60e91df21feee, type: 3}
   - {fileID: 8300000, guid: 3f2eaa47ebd0310419bb5b18eb94cf01, type: 3}
   - {fileID: 8300000, guid: c4d076e94f6a7c240b572bfe754b8a5e, type: 3}
-  settingVolume: 1
-  musicVolume: 1
+  - {fileID: 8300000, guid: dd7a2ccd1c793cb4db4e8ae0aeec22c3, type: 3}
+  soundSettingsVolume: 1
+  musicSettingsVolume: 1
   playerOverStateVolume: 1
   playerUnderStateVolume: 0
   boatStateVolume: 0
@@ -6785,6 +6790,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  noTime: 0
   SeagullSoundRandomRange: {x: 5, y: 30}
   SeagullSoundVolume: 0.25
   OceanSoundVolume: 0.5
