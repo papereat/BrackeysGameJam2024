@@ -20,6 +20,7 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
+        
     }
     void Awake()
     {

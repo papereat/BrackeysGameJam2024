@@ -38,10 +38,10 @@ public class DayCyleControler : MonoBehaviour
             PromptEndDay();
         }
 
-        if (player.day >= OpenHoleDay & time >= OpenHoleTime)
-        {
-            OpenBigHole();
-        }
+        //if (player.day >= OpenHoleDay & time >= OpenHoleTime)
+        //{
+        //    OpenBigHole();
+        //}
     }
 
     void OpenBigHole()
