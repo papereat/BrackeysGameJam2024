@@ -60,9 +60,13 @@ public class DayCyleControler : MonoBehaviour
         }
 
         //Open Whole
-        if (wm.inOverworld & player.day >= OpenHoleDay & time >= OpenHoleTime & !holeOpened)
+        if (wm.inOverworld)
         {
-            OpenBigHole();
+            if (player.day >= OpenHoleDay & time >= OpenHoleTime & !holeOpened)
+            {
+                OpenBigHole();
+            }
+
         }
     }
 

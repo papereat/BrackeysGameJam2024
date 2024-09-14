@@ -60,9 +60,10 @@ Material:
     - _Cloud_Sqease: 5.3
     - _Cloud_Strength: 1
     - _EnableExternalAlpha: 0
+    - _HellSkyToWorldLerp: 1
     - _Pixelafy_Value: 128
     - _Screen_Ratio: 1.777778
-    - _Sky_Gradient_Lerp_Function: 0.009332582
+    - _Sky_Gradient_Lerp_Function: 0.01932142
     - _Sun_Size: 0.025
     - _cloud_size: 7.5
     - _inHell: 1

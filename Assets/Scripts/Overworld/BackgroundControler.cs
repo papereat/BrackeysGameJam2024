@@ -7,6 +7,9 @@ public class BackgroundControler : MonoBehaviour
 {
     SoundController soundController;
 
+    PlayerManager pm;
+    WorldManager wm;
+
     public Vector2 Displacement;
 
     public Material BackgroundMaterial;
@@ -20,6 +23,12 @@ public class BackgroundControler : MonoBehaviour
     public Gradient SunBloomColor;
     public Gradient CloudColor;
     public Gradient SkyColorLerpFunction;
+
+
+    public Gradient HellSunColor;
+    public Gradient HellSunBloomColor;
+    public Gradient HellCloudColor;
+    public Gradient HellSkyColorLerpFunction;
     public bool noTime;
 
     [Header("Sound Settings")]
@@ -34,8 +43,10 @@ public class BackgroundControler : MonoBehaviour
     {
         soundController = SoundController.soundController;
         dcc = DayCyleControler.dcc;
-        
-        if(WorldManager.wm.inOverworld && !WorldManager.wm.inMenu)
+        wm = WorldManager.wm;
+        pm = PlayerManager.player;
+
+        if (WorldManager.wm.inOverworld && !WorldManager.wm.inMenu)
         {
             soundController.playOverSound(11, 1);
 
@@ -45,7 +56,7 @@ public class BackgroundControler : MonoBehaviour
 
             StartCoroutine(SeagullSounds(Random.Range(SeagullSoundRandomRange.x, SeagullSoundRandomRange.y)));
         }
-        else if(WorldManager.wm.inMenu)
+        else if (WorldManager.wm.inMenu)
         {
             StartCoroutine(OceanSounds(0));
 
@@ -94,25 +105,55 @@ public class BackgroundControler : MonoBehaviour
     void SetShaderValues()
     {
         float time = 0;
-        if(!noTime)
+        if (!noTime)
         {
-            time = dcc.time/dcc.DayLength;
+            time = dcc.time / dcc.DayLength;
         }
+
         //Sun Position
         BackgroundMaterial.SetVector("_Sun_Position", Vector2.Lerp(StartSunPositon, EndSunPosition, time));
-
-        //Sun Color
-        BackgroundMaterial.SetColor("_Sun_Color", SunColor.Evaluate(time));
-
-        //Bloom Color
-        BackgroundMaterial.SetColor("_BloomColor", SunBloomColor.Evaluate(time));
-
-        //Cloud Color
-        BackgroundMaterial.SetColor("_Cloud_Color", CloudColor.Evaluate(time));
 
         //Sky Color
         //Change the sky color gradients in the default values for the night and day sky gradients i nthe shader
         BackgroundMaterial.SetFloat("_Sky_Gradient_Lerp_Function", SkyColorLerpFunction.Evaluate(time).r);
+        if (wm.inMenu || !(wm.inOverworld & wm.inOverworld & dcc.OpenHoleDay <= pm.day))
+        {
+            BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", 0);
+        }
+
+        if (wm.inOverworld)
+        {
+            if (dcc.OpenHoleDay <= pm.day)
+            {
+                //SKy
+                BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", HellSkyColorLerpFunction.Evaluate(time).r);
+
+                //Sun Color
+                BackgroundMaterial.SetColor("_Sun_Color", Color.Lerp(SunColor.Evaluate(time), HellSunColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
+
+                //Bloom Color
+                BackgroundMaterial.SetColor("_BloomColor", Color.Lerp(SunBloomColor.Evaluate(time), HellSunBloomColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
+
+                //Cloud Color
+                BackgroundMaterial.SetColor("_Cloud_Color", Color.Lerp(CloudColor.Evaluate(time), HellCloudColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
+
+            }
+
+
+
+        }
+        else
+        {
+            //Sun Color
+            BackgroundMaterial.SetColor("_Sun_Color", SunColor.Evaluate(time));
+
+            //Bloom Color
+            BackgroundMaterial.SetColor("_BloomColor", SunBloomColor.Evaluate(time));
+
+            //Cloud Color
+            BackgroundMaterial.SetColor("_Cloud_Color", CloudColor.Evaluate(time));
+
+        }
 
     }
 }
