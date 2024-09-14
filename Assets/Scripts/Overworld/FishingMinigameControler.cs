@@ -48,12 +48,21 @@ public class FishingMinigameControler : MonoBehaviour
     bool upies;
 
     float x_location;
+    
+    [Header("Sound Settings")]
+    SoundController soundController;
+    public float emergeSoundHeight;
+    bool hasSplashed;
+
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerManager.player;
         wm = WorldManager.wm;
         rb = GetComponent<Rigidbody2D>();
+        soundController = SoundController.soundController;
+
+        StartCoroutine(BubbleSounds(0));
     }
 
     // Update is called once per frame
@@ -68,6 +77,14 @@ public class FishingMinigameControler : MonoBehaviour
         //Curretnly Telaporting the hook to the ship whenever we start fishing
         //We should eventually replace this with smth better
 
+    }
+    
+    IEnumerator BubbleSounds(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        soundController.playUnderSound(5, 1f);
+        StartCoroutine(BubbleSounds(soundController.sounds[5].length));
     }
     public void OnFrame()
     {
@@ -92,6 +109,8 @@ public class FishingMinigameControler : MonoBehaviour
     public void OnSurfaceCode()
     {
         upies = false;
+
+        hasSplashed = false;
 
         GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
 
@@ -134,6 +153,10 @@ public class FishingMinigameControler : MonoBehaviour
             FishingUI.GetComponent<Canvas>().enabled = false;
             FishBarTime = (1 - 4 * Mathf.Pow((FishBarTime - 0.5f), 2));
             GoingDown = true;
+            
+            soundController.playUnderSound(3, 1);
+            soundController.playerOverStateVolume = 0;
+            soundController.playerUnderStateVolume = 1;
         }
     }
 
@@ -152,6 +175,7 @@ public class FishingMinigameControler : MonoBehaviour
             GoingUp = true;
             rb.velocity = new Vector2();
 
+
             return;
         }
 
@@ -163,6 +187,14 @@ public class FishingMinigameControler : MonoBehaviour
 
     public void GoingUpCode()
     {
+        
+        if(transform.position.y >= emergeSoundHeight && !hasSplashed)
+        {
+            hasSplashed = true;
+            soundController.playOverSound(4, 1);
+            soundController.playerOverStateVolume = 1;
+            soundController.playerUnderStateVolume = 0;
+        }
         //Checks if at surface
         if (transform.position.y >= 0)
         {

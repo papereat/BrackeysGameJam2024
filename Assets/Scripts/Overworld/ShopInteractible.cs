@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ShopInteractible : LocationInteractableComponent
 {
+    SoundController soundController;
     public GameObject ShopUI;
     public GameObject GeneralUI;
     public float depthprice;
@@ -16,6 +17,8 @@ public class ShopInteractible : LocationInteractableComponent
     //Enables/Disables UI
     public override void OnActivate()
     {
+        soundController = SoundController.soundController;
+
         Debug.Log("WORKED");
         ShopUI.GetComponent<Canvas>().enabled = !ShopUI.GetComponent<Canvas>().enabled;
         GeneralUI.GetComponent<Canvas>().enabled = !GeneralUI.GetComponent<Canvas>().enabled;
@@ -25,16 +28,29 @@ public class ShopInteractible : LocationInteractableComponent
         ShopUI.transform.GetChild(6).GetChild(1).GetComponent<TMP_Text>().text = "Cost: " + capacityPrice;
     }
 
-    //PLACEHOLDER
+    void Start()
+    {
+        ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + 0;
+        GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + 0;
+        GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + 0;
+    }
+
     public void sellFish()
     {
-        //Change later to depend on type of fish etc. etc.
-        player.Money += player.valueOnShip;
-        player.valueOnShip = 0;
-        
-        ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
-        GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + player.Money;
-        GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
+        if(player.valueOnShip > 0)
+        {
+            soundController.playOverSound(7, 1);
+
+            //Change later to depend on type of fish etc. etc.
+            player.Money += player.valueOnShip;
+            player.valueOnShip = 0;
+            
+            ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
+            GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + player.Money;
+            GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
+        }
+
+
     }
 
     //Changing Value based on button press
@@ -44,6 +60,8 @@ public class ShopInteractible : LocationInteractableComponent
         {
             if(player.fishingRod.Depth < 5)
             {
+                soundController.playOverSound(6, 1);
+
                 player.Money -= depthprice;
                 ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
 
@@ -52,6 +70,7 @@ public class ShopInteractible : LocationInteractableComponent
 
                 player.fishingRod.Depth += 1;
                 ShopUI.transform.GetChild(4).GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Level: " + player.fishingRod.Depth;
+
             }
             
             else
@@ -69,6 +88,8 @@ public class ShopInteractible : LocationInteractableComponent
         {
             if(player.fishingRod.Power < 5)
             {
+                soundController.playOverSound(6, 1);
+
                 player.Money -= powerPrice;
                 ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
 
@@ -77,6 +98,7 @@ public class ShopInteractible : LocationInteractableComponent
 
                 player.fishingRod.Power += 1;
                 ShopUI.transform.GetChild(5).GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Level: " + player.fishingRod.Power;
+
             }
             
             else
@@ -94,6 +116,8 @@ public class ShopInteractible : LocationInteractableComponent
         {
             if(player.fishingRod.Capacity < 5)
             {
+                soundController.playOverSound(6, 1);
+
                 player.Money -= capacityPrice;
                 ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
 

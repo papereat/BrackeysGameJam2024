@@ -11,6 +11,7 @@ public class FishControler : MonoBehaviour
     Rigidbody2D rb;
 
     public float value;
+    public int rarityType;
 
     public float FishSpeed;
     public bool GoingLeft;
@@ -55,7 +56,9 @@ public class FishControler : MonoBehaviour
     public void CreateStats(float depth)
     {
         //I set value to whole number, change later
-        value = Mathf.Round(depth);
+        rarityType = Random.Range(0, 4);
+        value = Mathf.Round(depth * wm.fishRarityPrice[rarityType]);
+
         //value = depth;
         natural_x = transform.position.x;
     }

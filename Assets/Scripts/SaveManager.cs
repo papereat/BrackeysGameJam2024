@@ -38,6 +38,11 @@ public class SaveManager : MonoBehaviour
 
 
     }
+    public void ResetData()
+    {
+        saveData = new SaveData();
+        WriteData();
+    }
 
     public void CollectData()
     {
