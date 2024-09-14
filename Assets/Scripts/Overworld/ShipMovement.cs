@@ -18,6 +18,7 @@ public class ShipMovement : MonoBehaviour
 
     float movingIncrease;
     public float changeTime;
+    public Vector2 boatSoundRange;
 
     //Awake Functions Run Before the start function
     //Only use awake function for setting references and controling things inside this object
@@ -26,11 +27,11 @@ public class ShipMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
     void Start()
     {
         soundController = SoundController.soundController;
-        
+
         StartCoroutine(BoatSounds(0));
     }
 
@@ -44,20 +45,20 @@ public class ShipMovement : MonoBehaviour
 
     //Runs Everyframe while boat
     public void OnFrame()
-    {        
+    {
         soundController.boatStateVolume = 0.1f;
         Vector2 mov = new Vector2();
 
         if (Input.GetKey(Left))
         {
             movingIncrease += Time.deltaTime / changeTime;
-            
+
             mov.x -= 1;
         }
         if (Input.GetKey(Right))
         {
             movingIncrease += Time.deltaTime / changeTime;
-            
+
             mov.x += 1;
         }
 
@@ -74,14 +75,13 @@ public class ShipMovement : MonoBehaviour
         }
         else
         {
-            movingIncrease -= Time.deltaTime / changeTime;  
+            movingIncrease -= Time.deltaTime / changeTime;
         }
 
         movingIncrease = Mathf.Clamp(movingIncrease, 0, 1);
 
-        soundController.boatStateVolume = Mathf.Lerp(0.1f, 0.35f, movingIncrease);
+        soundController.boatStateVolume = Mathf.Lerp(boatSoundRange.x, boatSoundRange.y, movingIncrease);
 
-        Debug.Log(movingIncrease);
     }
 
     public void EveryFrame()

@@ -8,6 +8,9 @@ public class DayCyleControler : MonoBehaviour
     public float DayLength;
     public float time;
 
+    public float OpenHoleTime;
+    public int OpenHoleDay;
+
     SaveManager sm;
     PlayerManager player;
 
@@ -34,6 +37,16 @@ public class DayCyleControler : MonoBehaviour
         {
             PromptEndDay();
         }
+
+        if (player.day >= OpenHoleDay & time >= OpenHoleTime)
+        {
+            OpenBigHole();
+        }
+    }
+
+    void OpenBigHole()
+    {
+
     }
 
     void PromptEndDay()
@@ -46,6 +59,8 @@ public class DayCyleControler : MonoBehaviour
     {
         //Do stuff to finish day
         player.day++;
+
+        time = 0;
 
 
         //Save Game

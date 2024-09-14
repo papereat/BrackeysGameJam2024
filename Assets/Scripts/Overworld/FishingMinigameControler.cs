@@ -48,7 +48,7 @@ public class FishingMinigameControler : MonoBehaviour
     bool upies;
 
     float x_location;
-    
+
     [Header("Sound Settings")]
     SoundController soundController;
     public float emergeSoundHeight;
@@ -78,7 +78,7 @@ public class FishingMinigameControler : MonoBehaviour
         //We should eventually replace this with smth better
 
     }
-    
+
     IEnumerator BubbleSounds(float time)
     {
         yield return new WaitForSeconds(time);
@@ -153,7 +153,7 @@ public class FishingMinigameControler : MonoBehaviour
             FishingUI.GetComponent<Canvas>().enabled = false;
             FishBarTime = (1 - 4 * Mathf.Pow((FishBarTime - 0.5f), 2));
             GoingDown = true;
-            
+
             soundController.playUnderSound(3, 1);
             soundController.playerOverStateVolume = 0;
             soundController.playerUnderStateVolume = 1;
@@ -187,8 +187,8 @@ public class FishingMinigameControler : MonoBehaviour
 
     public void GoingUpCode()
     {
-        
-        if(transform.position.y >= emergeSoundHeight && !hasSplashed)
+
+        if (transform.position.y >= emergeSoundHeight && !hasSplashed)
         {
             hasSplashed = true;
             soundController.playOverSound(4, 1);
@@ -261,7 +261,7 @@ public class FishingMinigameControler : MonoBehaviour
         if (Random.Range(0f, 1f) <= spawnChance * Time.deltaTime)
         {
             GameObject spawnedFish = Instantiate(FishPrefab, new Vector3(transform.position.x + Random.Range(-1f, 1f) * wm.FishSpawnRange, transform.position.y - FishSpawnDepth, 0), new Quaternion(), FishCollection);
-            spawnedFish.GetComponent<FishControler>().CreateStats(Mathf.Abs(transform.position.y));
+            spawnedFish.GetComponent<FishControler>().CreateStats(Mathf.Abs(transform.position.y - FishSpawnDepth));
         }
     }
 

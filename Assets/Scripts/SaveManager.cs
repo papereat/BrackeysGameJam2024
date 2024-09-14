@@ -41,6 +41,7 @@ public class SaveManager : MonoBehaviour
     public void ResetData()
     {
         saveData = new SaveData();
+        saveData.inOverworld = true;
         WriteData();
     }
 

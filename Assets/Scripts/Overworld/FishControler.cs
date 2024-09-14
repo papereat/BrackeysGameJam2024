@@ -7,7 +7,7 @@ public class FishControler : MonoBehaviour
     Collider2D this_collider;
 
     PlayerManager player;
-    WorldManager wm;
+    public WorldManager wm;
     Rigidbody2D rb;
 
     public float value;
@@ -25,7 +25,7 @@ public class FishControler : MonoBehaviour
     void Start()
     {
         player = PlayerManager.player;
-        wm = WorldManager.wm;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -55,6 +55,7 @@ public class FishControler : MonoBehaviour
 
     public void CreateStats(float depth)
     {
+        wm = WorldManager.wm;
         //I set value to whole number, change later
         rarityType = Random.Range(0, 4);
         value = Mathf.Round(depth * wm.fishRarityPrice[rarityType]);
