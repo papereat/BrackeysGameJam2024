@@ -17,6 +17,7 @@ public class WorldManager : MonoBehaviour
     public float[] Power;
 
     public bool inOverworld;
+    public bool inMenu;
 
     [Header("Animation Settings")]
     public float framesPerSecond;

@@ -1,1 +1,1 @@
-{"Money":0.0,"Day":0,"Depth":0,"Capacity":0,"Power":0,"inOverworld":false}
+{"Money":0.0,"Day":0,"Depth":0,"Capacity":0,"Power":0,"inOverworld":false,"soundVolume":0.0,"musicVolume":0.0}
