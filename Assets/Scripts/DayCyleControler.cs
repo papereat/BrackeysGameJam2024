@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DayCyleControler : MonoBehaviour
 {
     public static DayCyleControler dcc;
+    SoundController soundController;
+    public GameObject ShopUI;
+    public GameObject GeneralUI;
     public float DayLength;
     public float time;
 
@@ -44,6 +47,7 @@ public class DayCyleControler : MonoBehaviour
         player = PlayerManager.player;
         wm = WorldManager.wm;
         sceneControler = SceneControler.sc;
+        soundController = SoundController.soundController;
 
         ResetHole();
     }
@@ -192,7 +196,15 @@ public class DayCyleControler : MonoBehaviour
     }
     void ResetDay()
     {
+        Debug.Log("Worked?");
+
         player.day++;
+
+        soundController.playerOverStateVolume = 1f;
+        soundController.playerUnderStateVolume = 0f;
+        soundController.boatStateVolume = 1;
+        
+        player.valueOnShip = 0f;
 
         time = 0;
         player.playerState = PlayerManager.PlayerState.Boat;
@@ -210,7 +222,13 @@ public class DayCyleControler : MonoBehaviour
     public void EndDay()
     {
         endingday = true;
+        
+        ShopUI.GetComponent<Canvas>().enabled = false;
+
+        GeneralUI.GetComponent<Canvas>().enabled = true;
+
         StartCoroutine(FadeToBlack());
+
         //Do stuff to finish day
 
 
