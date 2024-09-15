@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     //This bascily makes it so that in you can just do PlayerManager.player to get a refercne to the player object
     public static PlayerManager player;
     public GameObject GeneralUI;
+    
 
 
 

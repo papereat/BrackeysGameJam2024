@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using UnityEditor.Rendering;
+
 //using System.Numerics;
 using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
     UnderworldControler player;
+    SoundController soundController;
     public float Health = 50;
     public float enemySpeed = 0.1f;
     public float attackDamage = 5f;
@@ -34,13 +37,28 @@ public class Enemies : MonoBehaviour
 
     bool look_left;
 
+    public float knockbackTime = 1;
+
 
     void Start()
     {
         player = UnderworldControler.player;
+        soundController = SoundController.soundController;
+
         id = UnityEngine.Random.Range(-2147483648, 2147483647);
 
         rb = transform.GetComponent<Rigidbody2D>();
+
+        StartCoroutine(IdleSounds(UnityEngine.Random.Range(1, 4), 0));
+    }
+    IEnumerator IdleSounds(int sound, float time)
+    {
+        yield return new WaitForSeconds(time);
+        
+        soundController.playHellSound(sound, 0.1f);
+        int randSound = UnityEngine.Random.Range(1, 4);
+
+        StartCoroutine(IdleSounds(randSound, UnityEngine.Random.Range(1, 15)));
     }
 
     void Update()
@@ -94,9 +112,27 @@ public class Enemies : MonoBehaviour
     }
     public void Damage(float DamageAmount)
     {
-        Health -= DamageAmount;
+        soundController.playHellSound(7, 0.25f);
 
-        Debug.Log(gameObject.name + " Got Damaged");
+        Health -= DamageAmount;
+        StartCoroutine(pushBack((transform.position - player.transform.position).normalized));
+
+        Debug.Log(transform.position - player.transform.position);
+    }
+    IEnumerator pushBack(Vector3 direction)
+    {
+        float time = 0;
+        while(true)
+        {
+            transform.position += direction * 10 * 0.05f;
+            time += 0.05f;
+            if(time >= knockbackTime)
+            {
+                break;
+            }
+            
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
     void Movement()
@@ -125,6 +161,8 @@ public class Enemies : MonoBehaviour
 
         if ((jumpTime <= 0) && hit.collider != null && on_ground)
         {
+            soundController.playHellSound(5, 0.25f);
+
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             jumpTime = jumpRate;
         }
@@ -146,6 +184,8 @@ public class Enemies : MonoBehaviour
 
         if (attackTime <= 0 && playerDistance() < 3 & on_ground)
         {
+            soundController.playHellSound(6, 0.25f);
+
             StartCoroutine(AttackMelee());
             foreach (var item in AttackCollider())
             {
@@ -174,6 +214,7 @@ public class Enemies : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(this.gameObject);
+            player.Money += UnityEngine.Random.Range(1.0f, 10f);
         }
 
     }

@@ -84,7 +84,7 @@ public class FishingMinigameControler : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         soundController.playUnderSound(5, 1f);
-        StartCoroutine(BubbleSounds(soundController.sounds[5].length));
+        StartCoroutine(BubbleSounds(soundController.sounds[5].length - 1));
     }
     public void OnFrame()
     {
