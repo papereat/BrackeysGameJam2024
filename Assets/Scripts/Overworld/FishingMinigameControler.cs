@@ -168,7 +168,7 @@ public class FishingMinigameControler : MonoBehaviour
 
 
         //Checks if current depth has exceded or is equal to max depth of the rod
-        if (transform.position.y * -1 >= FishBarTime * wm.Depth[player.fishingRod.Depth])
+        if (transform.position.y * -1 >= FishBarTime * wm.GetDepth(player.fishingRod.Depth))
         {
             //Has hit max depth and will not start going up
             GoingDown = false;
@@ -180,7 +180,7 @@ public class FishingMinigameControler : MonoBehaviour
         }
 
         //has not hit bottom
-        rb.velocity = new Vector2(0, -1) * (FishBarTime * wm.Depth[player.fishingRod.Depth]) / GoingDownTime;
+        rb.velocity = new Vector2(0, -1) * (FishBarTime * wm.GetDepth(player.fishingRod.Depth)) / GoingDownTime;
 
 
     }
@@ -282,7 +282,9 @@ public class FishingMinigameControler : MonoBehaviour
 
     bool atCapacity()
     {
-        return FishCollected >= wm.Capacity[player.fishingRod.Capacity];
+        Debug.Log(FishCollected);
+        Debug.Log(wm.GetCapacity(player.fishingRod.Capacity));
+        return FishCollected >= wm.GetCapacity(player.fishingRod.Capacity);
     }
 
 

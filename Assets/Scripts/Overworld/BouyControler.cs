@@ -31,8 +31,8 @@ public class BouyControler : MonoBehaviour
 
     void Update()
     {
-        float point_a = waterHeight(0);
-        float point_b = waterHeight(SampleDistance);
+        float point_a = waterHeight(transform.position.x);
+        float point_b = waterHeight(transform.position.x + SampleDistance);
         rb.transform.localPosition = new Vector3(rb.transform.localPosition.x, (point_a + point_b) / 2f, rb.transform.localPosition.z);
 
         rb.transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * GetAngle(new Vector2(0, point_a), new Vector2(SampleDistance, point_b)));

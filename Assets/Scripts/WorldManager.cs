@@ -12,9 +12,12 @@ public class WorldManager : MonoBehaviour
     public float[] fishRarityPrice;
 
     [Header("Fishing Rod Upgrades")]
-    public float[] Depth;
-    public float[] Capacity;
-    public float[] Power;
+    public float StartingDepth;
+    public float DepthPerLevel;
+    public float StartingCapacity;
+    public float CapacityPerLevel;
+    public float StartingPower;
+    public float PowerPerLevel;
 
     public bool inOverworld;
     public bool inMenu;
@@ -41,5 +44,18 @@ public class WorldManager : MonoBehaviour
         time += Time.deltaTime;
 
         currentFrame = Mathf.FloorToInt(time * framesPerSecond);
+    }
+
+    public float GetDepth(float Level)
+    {
+        return StartingDepth + DepthPerLevel * Level;
+    }
+    public float GetCapacity(float Level)
+    {
+        return StartingCapacity + CapacityPerLevel * Level;
+    }
+    public float GetPower(float Level)
+    {
+        return StartingPower + PowerPerLevel * Level;
     }
 }

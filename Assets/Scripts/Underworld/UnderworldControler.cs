@@ -237,7 +237,7 @@ public class UnderworldControler : MonoBehaviour
         //Set Velocioty
         HookProjectile.GetComponent<Rigidbody2D>().velocity = dir * HookSpeed;
 
-        HookProjectile.GetComponent<HookControler>().HookLength = worldManager.Depth[fishingRod.Depth] / HookSpeed;
+        HookProjectile.GetComponent<HookControler>().HookLength = worldManager.GetDepth(fishingRod.Depth) / HookSpeed;
 
 
         activeProjectile = true;
@@ -261,11 +261,11 @@ public class UnderworldControler : MonoBehaviour
     }
     void ShootAttack(Enemies enemy)
     {
-        enemy.Damage(10 * worldManager.Power[fishingRod.Power]);
+        enemy.Damage(10 * worldManager.GetPower(fishingRod.Power));
     }
     void MeleeAttack(Enemies enemy)
     {
-        enemy.Damage(5 * worldManager.Power[fishingRod.Power]);
+        enemy.Damage(5 * worldManager.GetPower(fishingRod.Power));
     }
 
     IEnumerator AttackMelee()

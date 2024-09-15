@@ -41,7 +41,7 @@ public class HookControler : MonoBehaviour
 
             player.HitEnemyProjectile(col.GetComponent<Enemies>());
 
-            if (wm.Capacity[player.fishingRod.Capacity] >= Random.Range(0.0f, 1.0f))
+            if (wm.GetCapacity(player.fishingRod.Capacity) >= Random.Range(0.0f, 1.0f))
             {
                 return;
             }

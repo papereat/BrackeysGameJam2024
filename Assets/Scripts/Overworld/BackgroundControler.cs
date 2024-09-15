@@ -11,6 +11,7 @@ public class BackgroundControler : MonoBehaviour
     WorldManager wm;
 
     public Vector2 Displacement;
+    public bool FallowY;
 
     public Material BackgroundMaterial;
 
@@ -97,7 +98,7 @@ public class BackgroundControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(Camera.main.transform.position.x, 0) + Displacement;
+        transform.position = new Vector2(Camera.main.transform.position.x, FallowY ? Camera.main.transform.position.y : 0) + Displacement;
 
         SetShaderValues();
     }
@@ -116,31 +117,24 @@ public class BackgroundControler : MonoBehaviour
         //Sky Color
         //Change the sky color gradients in the default values for the night and day sky gradients i nthe shader
         BackgroundMaterial.SetFloat("_Sky_Gradient_Lerp_Function", SkyColorLerpFunction.Evaluate(time).r);
-        if (wm.inMenu || !(wm.inOverworld & wm.inOverworld & dcc.OpenHoleDay <= pm.day))
+        if (wm.inMenu || (wm.inOverworld && wm.inOverworld && dcc.OpenHoleDay > pm.day))
         {
             BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", 0);
         }
 
-        if (wm.inOverworld)
+        if (wm.inOverworld && dcc.OpenHoleDay <= pm.day)
         {
-            if (dcc.OpenHoleDay <= pm.day)
-            {
-                //SKy
-                BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", HellSkyColorLerpFunction.Evaluate(time).r);
+            //SKy
+            BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", HellSkyColorLerpFunction.Evaluate(time).r);
 
-                //Sun Color
-                BackgroundMaterial.SetColor("_Sun_Color", Color.Lerp(SunColor.Evaluate(time), HellSunColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
+            //Sun Color
+            BackgroundMaterial.SetColor("_Sun_Color", Color.Lerp(SunColor.Evaluate(time), HellSunColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
 
-                //Bloom Color
-                BackgroundMaterial.SetColor("_BloomColor", Color.Lerp(SunBloomColor.Evaluate(time), HellSunBloomColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
+            //Bloom Color
+            BackgroundMaterial.SetColor("_BloomColor", Color.Lerp(SunBloomColor.Evaluate(time), HellSunBloomColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
 
-                //Cloud Color
-                BackgroundMaterial.SetColor("_Cloud_Color", Color.Lerp(CloudColor.Evaluate(time), HellCloudColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
-
-            }
-
-
-
+            //Cloud Color
+            BackgroundMaterial.SetColor("_Cloud_Color", Color.Lerp(CloudColor.Evaluate(time), HellCloudColor.Evaluate(time), HellSkyColorLerpFunction.Evaluate(time).r));
         }
         else
         {

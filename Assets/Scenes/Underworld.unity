@@ -21565,7 +21565,7 @@ Transform:
   m_GameObject: {fileID: 952695026}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21612,7 +21612,7 @@ SpriteRenderer:
   m_SortingLayerID: -676967249
   m_SortingLayer: -1
   m_SortingOrder: -60
-  m_Sprite: {fileID: 21300000, guid: 0432e6b0a7b363f4a802239de94f1e40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5732b63b33e0424881b1c6369888887, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22220,9 +22220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fc0794394cdae498f0771ad81c4b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Displacement: {x: 0.3, y: 2.93}
+  Displacement: {x: 0.3, y: -3.58}
+  FallowY: 1
   BackgroundMaterial: {fileID: 2100000, guid: 51cf0ec40eded354989b37f93ddd076c, type: 2}
-  StartSunPositon: {x: 0.5, y: 0.5}
+  StartSunPositon: {x: 0.5, y: 0.3}
   EndSunPosition: {x: 0.5, y: 0.5}
   SunColor:
     serializedVersion: 2
@@ -22478,7 +22479,7 @@ Transform:
   m_GameObject: {fileID: 1328093003}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.94000006, y: 4.01, z: 0}
+  m_LocalPosition: {x: -0.5, y: -3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

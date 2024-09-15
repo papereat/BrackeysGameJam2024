@@ -42,12 +42,14 @@ public class FishControler : MonoBehaviour
 
         //Fish Movement
         //Turn around if on edge of swimming range
-        if (Mathf.Abs(transform.position.x - natural_x) >= wm.FishSpawnRange)
+        if ((transform.position.x - natural_x) * (GoingLeft ? -1 : 1) >= wm.FishSpawnRange)
         {
             GoingLeft = !GoingLeft;
         }
         //move
         rb.velocity = new Vector2(GoingLeft ? -1 : 1, 0) * FishSpeed;
+
+        GetComponent<SpriteRenderer>().flipX = !GoingLeft;
 
 
 

@@ -11,6 +11,10 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] KeyCode Left = KeyCode.A;
     [SerializeField] KeyCode Right = KeyCode.D;
 
+    public ParticleSystem boatParticles;
+    public Vector3 ParticleDisplacment;
+    public Vector3 ParticleAngle;
+
     public GameObject VFX;
 
     //Refernce to the Rigidbody
@@ -65,17 +69,26 @@ public class ShipMovement : MonoBehaviour
 
         rb.velocity = new Vector2(mov.x * movementSpeed, rb.velocity.y);
 
+        var emission = boatParticles.emission;
         if (mov.x == 1)
         {
             VFX.GetComponent<SpriteRenderer>().flipX = true;
+            boatParticles.transform.localPosition = new Vector3(-ParticleDisplacment.x, ParticleDisplacment.y, ParticleDisplacment.z);
+            boatParticles.transform.localEulerAngles = new Vector3(ParticleAngle.x, -ParticleAngle.y, ParticleAngle.z);
+
+            emission.enabled = true;
         }
         else if (mov.x == -1)
         {
             VFX.GetComponent<SpriteRenderer>().flipX = false;
+            emission.enabled = true;
+            boatParticles.transform.localPosition = ParticleDisplacment;
+            boatParticles.transform.localEulerAngles = ParticleAngle;
         }
         else
         {
             movingIncrease -= Time.deltaTime / changeTime;
+
         }
 
         movingIncrease = Mathf.Clamp(movingIncrease, 0, 1);
@@ -86,6 +99,8 @@ public class ShipMovement : MonoBehaviour
 
     public void EveryFrame()
     {
+        var emission = boatParticles.emission;
+        emission.enabled = false;
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
