@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
     public void StartHoleEffect()
     {
         playerState = PlayerState.Boat;
+        shipMovement.GetComponent<SpriteManager>().current_sprite = 0;
         inHole = true;
     }
 
@@ -157,7 +158,7 @@ public class PlayerManager : MonoBehaviour
     public void StopFishing()
     {
         playerState = PlayerState.Boat;
-        shipMovement.GetComponent<SpriteManager>().current_sprite = 0;
+
     }
 }
 

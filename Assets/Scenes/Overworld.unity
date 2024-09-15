@@ -1227,18 +1227,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FishSpawnRange: 5
+  FishDepthDivider: 5
+  rareFishPercentage: 0.1
   fishRarityPrice:
   - 1
-  - 1.2
-  - 2
   - 4
-  - 5
   FishSprites:
   - {fileID: 21300000, guid: e7423197b2865a640888a274220c1aee, type: 3}
   - {fileID: 21300000, guid: f190ccd40d0cb404287a4b340859675f, type: 3}
-  - {fileID: 21300000, guid: e7423197b2865a640888a274220c1aee, type: 3}
-  - {fileID: 21300000, guid: f190ccd40d0cb404287a4b340859675f, type: 3}
-  - {fileID: 21300000, guid: e7423197b2865a640888a274220c1aee, type: 3}
   StartingDepth: 10
   DepthPerLevel: 10
   StartingCapacity: 2
@@ -9197,7 +9193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FishSpawnDepth: 3
-  BaseFishSpawnChance: 0.03
+  BaseFishSpawnChance: 0.5
   FishSpawnChancePerUnit: 0.2
   FishCollection: {fileID: 748792874}
   FishPrefab: {fileID: 3801002632867477823, guid: 926e251e49e9d3b489cfd671bce14ae2, type: 3}
@@ -13841,8 +13837,8 @@ MonoBehaviour:
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 51079
-    ctime1: 52428
+    ctime0: 29491
+    ctime1: 30146
     ctime2: 0
     ctime3: 0
     ctime4: 0

@@ -9,6 +9,8 @@ public class WorldManager : MonoBehaviour
     public static WorldManager wm;
     [Header("Fishing Minigame")]
     public float FishSpawnRange;
+    public float FishDepthDivider;
+    public float rareFishPercentage;
     public float[] fishRarityPrice;
     public Sprite[] FishSprites;
 

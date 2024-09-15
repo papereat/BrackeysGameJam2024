@@ -59,8 +59,8 @@ public class FishControler : MonoBehaviour
     {
         wm = WorldManager.wm;
         //I set value to whole number, change later
-        rarityType = Random.Range(0, 4);
-        value = Mathf.Round(depth * wm.fishRarityPrice[rarityType]);
+        rarityType = Random.Range(0f, 1f) > wm.rareFishPercentage ? 0 : 1;
+        value = Mathf.Floor(((depth / wm.FishDepthDivider) + 1) * wm.fishRarityPrice[rarityType]);
 
         //value = depth;
         natural_x = transform.position.x;
