@@ -235,7 +235,9 @@ public class UnderworldControler : MonoBehaviour
         soundController.playHellSound(13, 0.5f);
 
         //Get direction
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - (transform.position + new Vector3(HookDisplacement.x * (right_anim ? 1 : -1), HookDisplacement.y, HookDisplacement.z));
+        dir = dir.normalized;
+        Debug.Log(dir.magnitude);
 
         //Teleport Bullet to player
         HookProjectile.transform.position = transform.position + new Vector3(HookDisplacement.x * (right_anim ? 1 : -1), HookDisplacement.y, HookDisplacement.z);
@@ -365,7 +367,7 @@ public class UnderworldControler : MonoBehaviour
         if (on_ground && jump_input && !activeProjectile && !attacking)
         {
             soundController.playHellSound(10, 0.1f);
-            
+
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
     }

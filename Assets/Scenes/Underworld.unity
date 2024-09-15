@@ -295,8 +295,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68647711}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.010465787}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -306,11 +306,11 @@ RectTransform:
   - {fileID: 447442663}
   - {fileID: 643398117}
   - {fileID: 727903199}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1726701943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.04248295, y: 0.078143105}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &69260000
@@ -707,7 +707,7 @@ RectTransform:
   - {fileID: 1150835791}
   - {fileID: 1408820827}
   - {fileID: 2028835416}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1726701943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -21080,7 +21080,7 @@ Transform:
   m_GameObject: {fileID: 447045156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.54, y: 1, z: -0.15342116}
+  m_LocalPosition: {x: 33.74, y: 0.71, z: -0.15342116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25263,42 +25263,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FishSpawnRange: 0
   fishRarityPrice: []
-  Depth:
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
-  - 8
-  - 9
-  - 10
-  - 11
-  - 12
-  - 13
-  Capacity:
-  - 0
-  - 0.1
-  - 0.2
-  - 0.3
-  - 0.4
-  - 0.5
-  - 0.6
-  - 0.7
-  - 0.8
-  - 0.9
-  - 1
-  Power:
-  - 1
-  - 1.2
-  - 1.4
-  - 1.6
-  - 1.8
-  - 2
-  - 2.2
-  - 2.4
-  - 2.6
-  - 2.8
-  - 3
+  StartingDepth: 3
+  DepthPerLevel: 1
+  StartingCapacity: 0
+  CapacityPerLevel: 0
+  StartingPower: 1
+  PowerPerLevel: 0.2
   inOverworld: 0
   inMenu: 0
   framesPerSecond: 4
@@ -25961,6 +25931,39 @@ Transform:
   - {fileID: 2030022751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1726701942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726701943}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1726701943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726701942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04248295, y: -0.078143105, z: -0.010465787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 163210301}
+  - {fileID: 68647715}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1745323082
 GameObject:
   m_ObjectHideFlags: 0
@@ -26254,7 +26257,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -26388,7 +26391,7 @@ Transform:
   m_GameObject: {fileID: 1866494675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.83, y: 0, z: -0.15342116}
+  m_LocalPosition: {x: -26.33, y: -1.15, z: -0.15342116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27195,10 +27198,9 @@ SceneRoots:
   - {fileID: 1328093005}
   - {fileID: 1866494676}
   - {fileID: 447045157}
-  - {fileID: 163210301}
-  - {fileID: 68647715}
   - {fileID: 1770135007}
   - {fileID: 519721033}
   - {fileID: 1841165009}
   - {fileID: 187519938}
   - {fileID: 670600077}
+  - {fileID: 1726701943}

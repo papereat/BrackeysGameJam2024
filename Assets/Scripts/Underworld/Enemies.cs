@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
-using UnityEditor.Rendering;
 
 //using System.Numerics;
 using UnityEngine;
@@ -54,7 +53,7 @@ public class Enemies : MonoBehaviour
     IEnumerator IdleSounds(int sound, float time)
     {
         yield return new WaitForSeconds(time);
-        
+
         soundController.playHellSound(sound, 0.1f);
         int randSound = UnityEngine.Random.Range(1, 4);
 
@@ -119,18 +118,18 @@ public class Enemies : MonoBehaviour
 
         Debug.Log(transform.position - player.transform.position);
     }
-    IEnumerator pushBack(Vector3 direction)
+    IEnumerator pushBack(Vector2 direction)
     {
         float time = 0;
-        while(true)
+        while (true)
         {
-            transform.position += direction * 10 * 0.05f;
+            transform.position += new Vector3(direction.x, direction.y, 0) * 10 * 0.05f;
             time += 0.05f;
-            if(time >= knockbackTime)
+            if (time >= knockbackTime)
             {
                 break;
             }
-            
+
             yield return new WaitForSeconds(0.05f);
         }
     }

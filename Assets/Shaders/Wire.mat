@@ -73,8 +73,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _Hook_Position: {r: -0.61968255, g: 0.18602586, b: -2.862968, a: 0}
+    - _Hook_Position: {r: -0.6196742, g: 0.18602586, b: -2.862968, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Rod_Positon: {r: -1.1196826, g: -0.10005152, b: 0, a: 0}
+    - _Rod_Positon: {r: 3.3757648, g: -0.10000026, b: 0, a: 0}
     - _Wire_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
