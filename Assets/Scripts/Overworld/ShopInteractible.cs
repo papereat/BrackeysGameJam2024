@@ -14,12 +14,12 @@ public class ShopInteractible : LocationInteractableComponent
     public float depthprice;
     public float powerPrice;
     public float capacityPrice;
+    bool inMenu;
+
 
     //Enables/Disables UI
     public override void OnActivate()
     {
-        soundController = SoundController.soundController;
-
         if (!ShopUI.GetComponent<Canvas>().enabled)
         {
             soundController.playOverSound(8, 0.5f);
@@ -35,11 +35,13 @@ public class ShopInteractible : LocationInteractableComponent
 
     void Start()
     {
+        soundController = SoundController.soundController;
 
         if (worldManager.inOverworld)
         {
             ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + 0;
             UpdateGeneralUI();
+
         }
         else
         {
@@ -64,7 +66,6 @@ public class ShopInteractible : LocationInteractableComponent
         }
         else
         {
-            Debug.Log("fsaf");
             UpdateGeneralUI();
         }
 

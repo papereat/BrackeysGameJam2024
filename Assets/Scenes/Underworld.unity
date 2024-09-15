@@ -26479,6 +26479,7 @@ MonoBehaviour:
   timeInFadeToBlackBeforeScreenTransition: 0
   timeTillGravity: 0
   Gravity: 0
+  fadedBlack: 0
   waterMaterial: {fileID: 0}
   FadeToBlackImage: {fileID: 0}
 --- !u!114 &1523714880
