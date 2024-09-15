@@ -9,6 +9,7 @@ using Unity.Burst.Intrinsics;
 public class UnderworldControler : MonoBehaviour
 {
     public static UnderworldControler player;
+    SoundController soundController;
     public StateAnimator stateAnimator;
     public FishingRod fishingRod;
     WorldManager worldManager;
@@ -69,6 +70,7 @@ public class UnderworldControler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        soundController = SoundController.soundController;
         worldManager = WorldManager.wm;
     }
 
@@ -200,6 +202,8 @@ public class UnderworldControler : MonoBehaviour
         //Melee attack
         if (do_hit & !aiming & !attacking & on_ground)
         {
+            soundController.playHellSound(8, 0.1f);
+
             StartCoroutine(AttackMelee());
             foreach (var item in AttackCollider())
             {
@@ -228,6 +232,8 @@ public class UnderworldControler : MonoBehaviour
 
     void ShootRod()
     {
+        soundController.playHellSound(13, 0.5f);
+
         //Get direction
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
@@ -277,6 +283,8 @@ public class UnderworldControler : MonoBehaviour
 
     public void Damage(float DamageAmount)
     {
+        soundController.playHellSound(9, 0.1f);
+
         playerHealth -= DamageAmount;
 
         StartCoroutine(OuchyEffect());
@@ -356,6 +364,8 @@ public class UnderworldControler : MonoBehaviour
         //Jump
         if (on_ground && jump_input && !activeProjectile && !attacking)
         {
+            soundController.playHellSound(10, 0.1f);
+            
             rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
     }

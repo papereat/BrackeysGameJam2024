@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class LocationInteractableComponent : MonoBehaviour
 {
-    Collider2D this_collider;
+    public Collider2D this_collider;
     [SerializeField]
     KeyCode Interact_Keycode = KeyCode.Space;
 
     public PlayerManager player;
+    public WorldManager worldManager;
+    public UnderworldControler underworldControler;
 
     void Awake()
     {
@@ -18,25 +20,45 @@ public class LocationInteractableComponent : MonoBehaviour
     void Start()
     {
         player = PlayerManager.player;
+        worldManager = WorldManager.wm;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //Checks if the center of the player is inside the bounds of the collider
-        if (this_collider.bounds.Contains(PlayerManager.player.GetCurrentPosition()))
+        if(worldManager.inOverworld)
         {
-            //Add Checks to make sure player can interact with this object
-
-            //Checks for Player Input
-            if (Input.GetKeyDown(Interact_Keycode))
+            //Checks if the center of the player is inside the bounds of the collider
+            if (this_collider.bounds.Contains(PlayerManager.player.GetCurrentPosition()))
             {
-                OnActivate();
-            }
+                //Add Checks to make sure player can interact with this object
 
-            OnFrame();
+                //Checks for Player Input
+                if (Input.GetKeyDown(Interact_Keycode))
+                {
+                    OnActivate();
+                }
+
+                OnFrame();
+            }
         }
+        else
+        {
+            if (this_collider.bounds.Contains(underworldControler.transform.position))
+            {
+                //Add Checks to make sure player can interact with this object
+                Debug.Log("yipee");
+                //Checks for Player Input
+                if (Input.GetKeyDown(Interact_Keycode))
+                {
+                    Debug.Log("???");
+                    OnActivate();
+                }
+
+                OnFrame();
+            }
+        }
+
     }
 
 

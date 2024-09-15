@@ -566,6 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interact_Keycode: 32
   player: {fileID: 1143376355}
+  worldManager: {fileID: 0}
 --- !u!114 &268924506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,6 +1318,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3f2eaa47ebd0310419bb5b18eb94cf01, type: 3}
   - {fileID: 8300000, guid: c4d076e94f6a7c240b572bfe754b8a5e, type: 3}
   - {fileID: 8300000, guid: dd7a2ccd1c793cb4db4e8ae0aeec22c3, type: 3}
+  hellSounds:
+  - {fileID: 8300000, guid: 880798f60f09cde42abd4236048571ff, type: 3}
   soundSettingsVolume: 1
   musicSettingsVolume: 1
   playerOverStateVolume: 1
@@ -12544,6 +12547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interact_Keycode: 32
   player: {fileID: 1143376355}
+  worldManager: {fileID: 337379901}
   ShopUI: {fileID: 821098490}
   GeneralUI: {fileID: 1061161997}
   depthprice: 10

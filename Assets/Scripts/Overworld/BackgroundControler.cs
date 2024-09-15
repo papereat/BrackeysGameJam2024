@@ -68,9 +68,19 @@ public class BackgroundControler : MonoBehaviour
         else
         {
             soundController.playOverSound(11, 1);
+
+            StartCoroutine(SoulSounds(0));
         }
 
     }
+    IEnumerator SoulSounds(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        soundController.playHellSound(12, OceanSoundVolume);
+        StartCoroutine(SoulSounds(soundController.hellSounds[12].length - 1));
+    }
+
     IEnumerator SeagullSounds(float time)
     {
         yield return new WaitForSeconds(time);
@@ -84,7 +94,7 @@ public class BackgroundControler : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         soundController.playOverSound(0, OceanSoundVolume);
-        StartCoroutine(OceanSounds(soundController.sounds[0].length));
+        StartCoroutine(OceanSounds(soundController.sounds[0].length - 1));
     }
 
     IEnumerator WindSounds(float time)
@@ -92,7 +102,7 @@ public class BackgroundControler : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         soundController.playOverSound(2, OceanSoundVolume);
-        StartCoroutine(WindSounds(soundController.sounds[2].length));
+        StartCoroutine(WindSounds(soundController.sounds[2].length - 1));
     }
 
     // Update is called once per frame
@@ -117,7 +127,7 @@ public class BackgroundControler : MonoBehaviour
         //Sky Color
         //Change the sky color gradients in the default values for the night and day sky gradients i nthe shader
         BackgroundMaterial.SetFloat("_Sky_Gradient_Lerp_Function", SkyColorLerpFunction.Evaluate(time).r);
-        if (wm.inMenu || (wm.inOverworld && wm.inOverworld && dcc.OpenHoleDay > pm.day))
+        if (wm.inMenu || (wm.inOverworld && dcc.OpenHoleDay > pm.day))
         {
             BackgroundMaterial.SetFloat("_HellSkyToWorldLerp", 0);
         }

@@ -2451,6 +2451,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ff49cbd1cfb740e48a3c4f0cc60df848, type: 3}
   - {fileID: 8300000, guid: ff49cbd1cfb740e48a3c4f0cc60df848, type: 3}
   - {fileID: 8300000, guid: dd7a2ccd1c793cb4db4e8ae0aeec22c3, type: 3}
+  hellSounds:
+  - {fileID: 8300000, guid: ff49cbd1cfb740e48a3c4f0cc60df848, type: 3}
   soundSettingsVolume: 1
   musicSettingsVolume: 1
   playerOverStateVolume: 1
@@ -3474,7 +3476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

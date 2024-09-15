@@ -63,7 +63,7 @@ Material:
     - _HellSkyToWorldLerp: 1
     - _Pixelafy_Value: 128
     - _Screen_Ratio: 1.777778
-    - _Sky_Gradient_Lerp_Function: 0.022659734
+    - _Sky_Gradient_Lerp_Function: 0
     - _Sun_Size: 0.025
     - _cloud_size: 7.5
     - _inHell: 1

@@ -11,10 +11,11 @@ public class SoundController : MonoBehaviour
     public AudioSource boatSoundSrc;
     public AudioSource musicSrc;
     public AudioClip[] sounds;
+    public AudioClip[] hellSounds;
 
     public float soundSettingsVolume = 1f;
     public float musicSettingsVolume = 1f;
-    public float playerOverStateVolume;
+    public float playerOverStateVolume = 1f;
     public float playerUnderStateVolume;
     public float boatStateVolume;
 
@@ -49,6 +50,13 @@ public class SoundController : MonoBehaviour
     {
         
         boatSoundSrc.PlayOneShot(sounds[soundIndex], soundVolume);
+    }
+
+    
+    public void playHellSound(int soundIndex, float soundVolume)
+    {
+        
+        overSoundSrc.PlayOneShot(hellSounds[soundIndex], soundVolume);
     }
     
     public void playMusic(int soundIndex, float muiscVolume)
