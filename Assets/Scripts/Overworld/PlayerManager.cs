@@ -159,6 +159,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerState = PlayerState.Boat;
 
+        shipMovement.GetComponent<SpriteManager>().current_sprite = 0;
     }
 }
 

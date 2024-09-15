@@ -175,8 +175,7 @@ public class DayCyleControler : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(timeInFadeToBlackBeforeScreenTransition);
-        //sm.CollectData();
-        //sm.WriteData();
+
         ResetDay();
         time = 0;
         while (true)
@@ -203,14 +202,20 @@ public class DayCyleControler : MonoBehaviour
         soundController.playerOverStateVolume = 1f;
         soundController.playerUnderStateVolume = 0f;
         soundController.boatStateVolume = 1;
-        
+
         player.valueOnShip = 0f;
 
         time = 0;
         player.playerState = PlayerManager.PlayerState.Boat;
         player.shipMovement.transform.position = Vector3.zero;
+        player.FMC.GoingDown = false;
+        player.FMC.GoingUp = false;
+        player.FMC.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        player.FMC.OnSurface = true;
 
         endingday = false;
+        sm.CollectData();
+        sm.WriteData();
     }
 
     void PromptEndDay()
@@ -222,7 +227,7 @@ public class DayCyleControler : MonoBehaviour
     public void EndDay()
     {
         endingday = true;
-        
+
         ShopUI.GetComponent<Canvas>().enabled = false;
 
         GeneralUI.GetComponent<Canvas>().enabled = true;
