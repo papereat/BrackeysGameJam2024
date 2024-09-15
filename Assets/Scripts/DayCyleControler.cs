@@ -19,12 +19,14 @@ public class DayCyleControler : MonoBehaviour
     public float timeInFadeToBlackBeforeScreenTransition;
     public float timeTillGravity;
     public float Gravity;
+    public float fadedBlack;
 
 
     public Material waterMaterial;
     public Image FadeToBlackImage;
 
     bool holeOpened = false;
+    bool endingday = false;
 
     SaveManager sm;
     PlayerManager player;
@@ -54,9 +56,9 @@ public class DayCyleControler : MonoBehaviour
 
 
         //End day
-        if (time >= DayLength)
+        if (time >= DayLength && !endingday)
         {
-            PromptEndDay();
+            EndDay();
         }
 
         //Open Whole
@@ -89,7 +91,7 @@ public class DayCyleControler : MonoBehaviour
 
 
         //Start coroutine to wait a ffew seconds then start fade to black and once faded to black switch scene
-        StartCoroutine(FadeToBlack());
+        StartCoroutine(FadeToBlackHell());
 
     }
 
@@ -129,7 +131,7 @@ public class DayCyleControler : MonoBehaviour
         player.shipMovement.GetComponent<Rigidbody2D>().gravityScale = Gravity;
     }
 
-    IEnumerator FadeToBlack()
+    IEnumerator FadeToBlackHell()
     {
         yield return new WaitForSeconds(timeTillStartFadeToBlack);
         float time = 0;
@@ -151,6 +153,54 @@ public class DayCyleControler : MonoBehaviour
         sceneControler.LoadScene(2);
     }
 
+    IEnumerator FadeToBlack()
+    {
+        sm.CollectData();
+        sm.WriteData();
+        float time = 0;
+        while (true)
+        {
+            FadeToBlackImage.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, time / FadeToBlackTime));
+
+            if (time >= FadeToBlackTime)
+            {
+                break;
+            }
+
+            time += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(timeInFadeToBlackBeforeScreenTransition);
+        //sm.CollectData();
+        //sm.WriteData();
+        ResetDay();
+        time = 0;
+        while (true)
+        {
+            FadeToBlackImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, time / FadeToBlackTime));
+
+            if (time >= FadeToBlackTime)
+            {
+                break;
+            }
+
+            time += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        FadeToBlackImage.color = new Color(0, 0, 0, 0);
+
+    }
+    void ResetDay()
+    {
+        player.day++;
+
+        time = 0;
+        player.playerState = PlayerManager.PlayerState.Boat;
+        player.shipMovement.transform.position = Vector3.zero;
+
+        endingday = false;
+    }
+
     void PromptEndDay()
     {
         //Temp Currently Does nothing
@@ -159,15 +209,17 @@ public class DayCyleControler : MonoBehaviour
 
     public void EndDay()
     {
+        endingday = true;
+        StartCoroutine(FadeToBlack());
         //Do stuff to finish day
-        player.day++;
 
-        time = 0;
 
 
         //Save Game
-        sm.CollectData();
-        sm.WriteData();
+
+
+        //Fade To black
+
 
 
     }

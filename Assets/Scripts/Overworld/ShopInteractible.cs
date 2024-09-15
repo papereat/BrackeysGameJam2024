@@ -39,8 +39,7 @@ public class ShopInteractible : LocationInteractableComponent
         if (worldManager.inOverworld)
         {
             ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + 0;
-            GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + 0;
-            GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + 0;
+            UpdateGeneralUI();
         }
         else
         {
@@ -49,6 +48,12 @@ public class ShopInteractible : LocationInteractableComponent
         }
 
     }
+
+    void UpdateGeneralUI()
+    {
+        GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + player.Money;
+        GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
+    }
     public override void Update()
     {
         base.Update();
@@ -56,6 +61,11 @@ public class ShopInteractible : LocationInteractableComponent
         {
             ShopUI.transform.GetChild(2).GetComponent<TMP_Text>().text = "Money: " + underworldControler.Money;
             GeneralUI.transform.GetChild(0).GetComponent<TMP_Text>().text = "Money: " + underworldControler.Money;
+        }
+        else
+        {
+            Debug.Log("fsaf");
+            UpdateGeneralUI();
         }
 
     }

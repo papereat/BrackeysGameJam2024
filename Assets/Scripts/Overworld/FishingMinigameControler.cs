@@ -114,7 +114,7 @@ public class FishingMinigameControler : MonoBehaviour
 
         GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Value on Ship: " + player.valueOnShip;
 
-        transform.position = player.shipMovement.GetShipPosition();
+        transform.position = player.shipMovement.GetShipPosition() + new Vector3(player.HookDisplacement.x * (player.shipMovement.VFX.GetComponent<SpriteRenderer>().flipX ? -1 : 1), player.HookDisplacement.y, player.HookDisplacement.z);
         x_location = transform.position.x;
 
         //
@@ -218,8 +218,6 @@ public class FishingMinigameControler : MonoBehaviour
         //Presses Key To Speeed Up Going Up
         if (Input.GetKeyDown(GoUpKey) || atCapacity())
         {
-            Debug.Log("fars");
-
             StartCoroutine(AccelerateHook(10, 1));
         }
     }
@@ -282,8 +280,6 @@ public class FishingMinigameControler : MonoBehaviour
 
     bool atCapacity()
     {
-        Debug.Log(FishCollected);
-        Debug.Log(wm.GetCapacity(player.fishingRod.Capacity));
         return FishCollected >= wm.GetCapacity(player.fishingRod.Capacity);
     }
 

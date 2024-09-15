@@ -64,5 +64,7 @@ public class FishControler : MonoBehaviour
 
         //value = depth;
         natural_x = transform.position.x;
+
+        GetComponent<SpriteRenderer>().sprite = wm.FishSprites[rarityType];
     }
 }
