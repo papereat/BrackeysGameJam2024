@@ -72,7 +72,7 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _Foam_Length: 0.25
-    - _Hole_Position: -6.499996
+    - _Hole_Position: 0
     - _Pixelafy_Value: 16
     - _QueueControl: 0
     - _QueueOffset: 0
