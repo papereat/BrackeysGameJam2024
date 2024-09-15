@@ -37,6 +37,7 @@ public class SaveManager : MonoBehaviour
         soundController = SoundController.soundController;
         settingsController = SettingsController.settingsController;
 
+        Debug.Log("start");
         ReadData(saveName);
         if (autoLoadSave)
         {
@@ -140,7 +141,7 @@ public class SaveManager : MonoBehaviour
     }
     public void ReadData(string name)
     {
-        string path = "Assets/Resources/" + name;
+        string path = "Assets/Resources/" + name + ".txt";
 
         AssetDatabase.ImportAsset(path);
         TextAsset asset = Resources.Load<TextAsset>(name);

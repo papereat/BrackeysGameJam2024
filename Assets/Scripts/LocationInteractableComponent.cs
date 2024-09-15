@@ -30,7 +30,7 @@ public class LocationInteractableComponent : MonoBehaviour
         if (worldManager.inOverworld)
         {
             //Checks if the center of the player is inside the bounds of the collider
-            if (this_collider.bounds.Contains(PlayerManager.player.GetCurrentPosition()))
+            if (this_collider.bounds.Contains(PlayerManager.player.shipMovement.GetShipPosition()))
             {
                 //Add Checks to make sure player can interact with this object
 

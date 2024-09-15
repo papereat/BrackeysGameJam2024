@@ -64,7 +64,7 @@ public class ShopInteractible : LocationInteractableComponent
         }
         else
         {
-            Debug.Log("fsaf");
+
             UpdateGeneralUI();
         }
 

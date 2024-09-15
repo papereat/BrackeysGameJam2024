@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     //This bascily makes it so that in you can just do PlayerManager.player to get a refercne to the player object
     public static PlayerManager player;
     public GameObject GeneralUI;
-    
+
 
 
 
@@ -69,6 +69,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         shipMovement.EveryFrame();
+        FMC.EveryFrame(playerState != PlayerState.Fishing);
 
 
         //Code Due to State

@@ -24,7 +24,9 @@ public class EnemySpawnController : MonoBehaviour
     public float startingEnemies;
     public float startingEnemiesPerWave;
     public float startingEnemiesPerWaveMultiplier;
-    
+    public float startingAttackDamage;
+    public float AttackDamagePerWave;
+
     void Start()
     {
         WorldManager worldManager = WorldManager.wm;
@@ -38,7 +40,7 @@ public class EnemySpawnController : MonoBehaviour
 
     void Update()
     {
-        if(storage.transform.childCount == 0)
+        if (storage.transform.childCount == 0)
         {
             GeneralUI.transform.GetChild(3).gameObject.SetActive(true);
             waveButtonPressed = false;
@@ -51,7 +53,7 @@ public class EnemySpawnController : MonoBehaviour
     }
     public void newWave()
     {
-        if(!waveButtonPressed)
+        if (!waveButtonPressed)
         {
             waveButtonPressed = true;
             waveCounter++;
@@ -65,12 +67,13 @@ public class EnemySpawnController : MonoBehaviour
     void SpawnEnemies()
     {
         float amount = startingEnemies * Mathf.Pow(startingEnemiesPerWaveMultiplier, (startingEnemiesPerWave * waveCounter));
-        
-        for(int i = 0; i < amount; i++)
+
+        for (int i = 0; i < amount; i++)
         {
-            GameObject newGuy = Instantiate(enemyPrefab, Random.Range(0, 2) == 1 ? spawnPoint1.transform.position:spawnPoint2.transform.position, Quaternion.identity, storage.transform);
-            
+            GameObject newGuy = Instantiate(enemyPrefab, Random.Range(0, 2) == 1 ? spawnPoint1.transform.position : spawnPoint2.transform.position, Quaternion.identity, storage.transform);
+
             newGuy.GetComponent<Enemies>().id = UnityEngine.Random.Range(-2147483648, 2147483647);
+            newGuy.GetComponent<Enemies>().attackDamage = startingAttackDamage + AttackDamagePerWave * waveCounter;
         }
 
     }

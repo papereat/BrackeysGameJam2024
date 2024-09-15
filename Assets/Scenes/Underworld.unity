@@ -24581,7 +24581,7 @@ Transform:
   m_GameObject: {fileID: 1000149188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.862968}
+  m_LocalPosition: {x: 3.4, y: 19.4, z: -2.862968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26434,7 +26434,7 @@ MonoBehaviour:
   StartingDepth: 3
   DepthPerLevel: 1
   StartingCapacity: 0
-  CapacityPerLevel: 0
+  CapacityPerLevel: 0.1
   StartingPower: 1
   PowerPerLevel: 0.2
   inOverworld: 0
@@ -26479,6 +26479,7 @@ MonoBehaviour:
   timeInFadeToBlackBeforeScreenTransition: 0
   timeTillGravity: 0
   Gravity: 0
+  fadedBlack: 0
   waterMaterial: {fileID: 0}
   FadeToBlackImage: {fileID: 0}
 --- !u!114 &1523714880
@@ -26503,6 +26504,8 @@ MonoBehaviour:
   startingEnemies: 2
   startingEnemiesPerWave: 0.6
   startingEnemiesPerWaveMultiplier: 1.8
+  startingAttackDamage: 5
+  AttackDamagePerWave: 2
 --- !u!114 &1523714881
 MonoBehaviour:
   m_ObjectHideFlags: 0

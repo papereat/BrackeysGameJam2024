@@ -67,14 +67,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _Line_Width: 0.025
+    - _Line_Width: 0.03
     - _No_Show: 0
     - _Pixelafy_Value: 16
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _Hook_Position: {r: -0.61968255, g: 0.18602586, b: -2.862968, a: 0}
+    - _Hook_Position: {r: 2.7803173, g: 19.586025, b: -2.862968, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Rod_Positon: {r: -5.272996, g: 0.722, b: 0, a: 0}
+    - _Rod_Positon: {r: 7.4550953, g: -0.10000181, b: 0, a: 0}
     - _Wire_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -78,6 +78,13 @@ public class FishingMinigameControler : MonoBehaviour
         //We should eventually replace this with smth better
 
     }
+    public void EveryFrame(bool tp_)
+    {
+        if (tp_)
+        {
+            transform.position = new Vector3(0, 23495, 0);
+        }
+    }
 
     IEnumerator BubbleSounds(float time)
     {
