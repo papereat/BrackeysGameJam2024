@@ -1015,7 +1015,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211171820}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -6074,11 +6074,11 @@ MonoBehaviour:
 
     My knees are too weak to go fishing, so why don''t
     you take a stab at it? Take me old sea-faring vessal out passed the wharf and
-    meet up with an old buddy of mine. Do it for yer grandpappy, okay?
+    meet up with an old buddy of mine. Do it for yer grandpappy, okay? It''ll only
+    be a couple of days.
 
 
-    Don''t
-    break me boat,
+    Don''t break me boat,
 
     Grandad'
   m_isRightToLeft: 0
