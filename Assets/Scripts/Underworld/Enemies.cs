@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -213,7 +213,7 @@ public class Enemies : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(this.gameObject);
-            player.Money += UnityEngine.Random.Range(1.0f, 10f);
+            player.Money += Random.Range(1, 10);
         }
 
     }

@@ -24,9 +24,10 @@ public class LocationInteractableComponent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        if(worldManager.inOverworld)
+
+        if (worldManager.inOverworld)
         {
             //Checks if the center of the player is inside the bounds of the collider
             if (this_collider.bounds.Contains(PlayerManager.player.GetCurrentPosition()))
@@ -47,11 +48,9 @@ public class LocationInteractableComponent : MonoBehaviour
             if (this_collider.bounds.Contains(underworldControler.transform.position))
             {
                 //Add Checks to make sure player can interact with this object
-                Debug.Log("yipee");
                 //Checks for Player Input
                 if (Input.GetKeyDown(Interact_Keycode))
                 {
-                    Debug.Log("???");
                     OnActivate();
                 }
 

@@ -53,6 +53,7 @@ public class SaveManager : MonoBehaviour
 
         saveData = new SaveData();
         saveData.inOverworld = true;
+        saveData.Day = 1;
 
         saveData.soundVolume = tempSound;
         saveData.musicVolume = tempMusic;

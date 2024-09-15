@@ -1015,7 +1015,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211171820}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1363,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &423906587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,9 +2488,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FishSpawnRange: 0
   fishRarityPrice: []
-  Depth: []
-  Capacity: []
-  Power: []
+  StartingDepth: 0
+  DepthPerLevel: 0
+  StartingCapacity: 0
+  CapacityPerLevel: 0
+  StartingPower: 0
+  PowerPerLevel: 0
   inOverworld: 0
   inMenu: 1
   framesPerSecond: 0
@@ -5730,6 +5733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Displacement: {x: 0.94, y: 4.01}
+  FallowY: 0
   BackgroundMaterial: {fileID: 2100000, guid: c1cea9b46e2b12d4595c87e2ecffb476, type: 2}
   StartSunPositon: {x: 0.5, y: 0.5}
   EndSunPosition: {x: 0.8, y: 0.08995694}

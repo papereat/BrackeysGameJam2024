@@ -383,6 +383,13 @@ public class UnderworldControler : MonoBehaviour
 
     }
 
+    void OnTriggerStay2D(Collider2D col)
+    {
+        on_ground = true;
+        do_jump_anim = false;
+
+    }
+
     void OnTriggerExit2D(Collider2D other)
     {
         on_ground = false;

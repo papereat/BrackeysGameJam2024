@@ -10,6 +10,7 @@ public class WorldManager : MonoBehaviour
     [Header("Fishing Minigame")]
     public float FishSpawnRange;
     public float[] fishRarityPrice;
+    public Sprite[] FishSprites;
 
     [Header("Fishing Rod Upgrades")]
     public float StartingDepth;
