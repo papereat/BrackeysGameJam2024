@@ -5,6 +5,7 @@ using System.Data.Common;
 
 //using System.Numerics;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Enemies : MonoBehaviour
 {
@@ -109,12 +110,15 @@ public class Enemies : MonoBehaviour
             }
         }
     }
-    public void Damage(float DamageAmount)
+    public void Damage(float DamageAmount, bool doKnockback)
     {
         soundController.playHellSound(7, 0.25f);
 
         Health -= DamageAmount;
-        StartCoroutine(pushBack((transform.position - player.transform.position).normalized));
+        if(doKnockback)
+        {
+            StartCoroutine(pushBack((transform.position - player.transform.position).normalized));
+        }
 
         Debug.Log(transform.position - player.transform.position);
     }
@@ -170,6 +174,11 @@ public class Enemies : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         on_ground = true;
+    }    
+    
+    void OnTriggerStay2D(Collider2D col)
+    {
+        on_ground = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -213,7 +222,14 @@ public class Enemies : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(this.gameObject);
-            player.Money += Random.Range(1, 10);
+            int value = Random.Range(1, 10);
+            player.Money += value;
+            player.TotalMoney += value;
+        }
+        
+        if(transform.position.y <= -10)
+        {
+            Destroy(this.gameObject);
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Burst.Intrinsics;
+using UnityEngine.SceneManagement;
 
 
 
@@ -10,6 +11,8 @@ public class UnderworldControler : MonoBehaviour
 {
     public static UnderworldControler player;
     SoundController soundController;
+    public GameObject DeathUI;
+    public GameObject GeneralUI;
     public StateAnimator stateAnimator;
     public FishingRod fishingRod;
     WorldManager worldManager;
@@ -35,6 +38,7 @@ public class UnderworldControler : MonoBehaviour
     public float HookSpeed;
     public Vector2 AttackSize;
     public float Money;
+    public float TotalMoney;
     public int day;
 
     float JumpAnimTime;
@@ -88,6 +92,8 @@ public class UnderworldControler : MonoBehaviour
 
         Animations();
         HookShaderUpdate();
+
+        GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Health " + playerHealth;
 
     }
     void HookShaderUpdate()
@@ -219,11 +225,23 @@ public class UnderworldControler : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
-            //Do later
+            onDeath();
+        }
+
+        if(transform.position.y <= -10)
+        {
+            onDeath();
         }
 
     }
 
+    void onDeath()
+    {
+        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+        DeathUI.GetComponent<Canvas>().enabled = true;
+        DeathUI.transform.GetChild(0).transform.GetChild(1).GetComponent<TMP_Text>().text = "Total Money Earned: \n" + TotalMoney;
+    }
+    
     void ShowRodAim()
     {
         //We want to show a line that would show how to hook is gonna travel when shot
@@ -269,11 +287,11 @@ public class UnderworldControler : MonoBehaviour
     }
     void ShootAttack(Enemies enemy)
     {
-        enemy.Damage(10 * worldManager.GetPower(fishingRod.Power));
+        enemy.Damage(3 * worldManager.GetPower(fishingRod.Power), false);
     }
     void MeleeAttack(Enemies enemy)
     {
-        enemy.Damage(5 * worldManager.GetPower(fishingRod.Power));
+        enemy.Damage(10 * worldManager.GetPower(fishingRod.Power), true);
     }
 
     IEnumerator AttackMelee()

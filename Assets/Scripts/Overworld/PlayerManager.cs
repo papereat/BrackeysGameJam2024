@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     //These are the stats that change over time like money and day and time
     [Header("Stats")]
     public float Money;
+    public float TotalMoney;
     public float valueOnShip;
     public int day = 1;
     public string[] dayWeek;
