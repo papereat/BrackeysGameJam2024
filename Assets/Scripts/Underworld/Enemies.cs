@@ -115,7 +115,7 @@ public class Enemies : MonoBehaviour
         soundController.playHellSound(7, 0.25f);
 
         Health -= DamageAmount;
-        if(doKnockback)
+        if (doKnockback)
         {
             StartCoroutine(pushBack((transform.position - player.transform.position).normalized));
         }
@@ -174,8 +174,8 @@ public class Enemies : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         on_ground = true;
-    }    
-    
+    }
+
     void OnTriggerStay2D(Collider2D col)
     {
         on_ground = true;
@@ -222,12 +222,12 @@ public class Enemies : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(this.gameObject);
-            int value = Random.Range(1, 10);
+            int value = Random.Range(10, 100);
             player.Money += value;
             player.TotalMoney += value;
         }
-        
-        if(transform.position.y <= -10)
+
+        if (transform.position.y <= -10)
         {
             Destroy(this.gameObject);
         }

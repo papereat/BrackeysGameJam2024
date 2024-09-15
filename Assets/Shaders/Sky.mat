@@ -60,23 +60,23 @@ Material:
     - _Cloud_Sqease: 5.3
     - _Cloud_Strength: 1
     - _EnableExternalAlpha: 0
-    - _HellSkyToWorldLerp: 0
+    - _HellSkyToWorldLerp: 1
     - _Pixelafy_Value: 128
     - _Screen_Ratio: 1.777778
-    - _Sky_Gradient_Lerp_Function: 0.055996206
+    - _Sky_Gradient_Lerp_Function: 0.5865707
     - _Sun_Size: 0.025
     - _cloud_size: 7.5
     - _inHell: 0
     m_Colors:
-    - _BloomColor: {r: 0.99788696, g: 0.9743269, b: 0.87437356, a: 1}
-    - _Cloud_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BloomColor: {r: 1, g: 0, b: 0, a: 1}
+    - _Cloud_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Cloud_Time_Scale: {r: -0.001, g: -0.0001, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _Sky_Color: {r: 0.5566928, g: 0.7918957, b: 0.8490566, a: 0}
-    - _Sun_Color: {r: 1, g: 0.9882353, b: 0.88235295, a: 1}
-    - _Sun_Position: {r: 0.51679885, g: 0.47703916, b: 0, a: 0}
+    - _Sun_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Sun_Position: {r: 0.6759712, g: 0.25948077, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6612552924969876135
 MonoBehaviour:

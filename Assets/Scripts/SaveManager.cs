@@ -134,19 +134,32 @@ public class SaveManager : MonoBehaviour
 
     static void RewriteFile(string name, string value)
     {
-        string path = "Assets/Resources/" + name + ".txt";
+        string path = Application.dataPath + "/Resources/" + name + ".txt";
         StreamWriter writer = new StreamWriter(path, false);
         writer.WriteLine(value);
         writer.Close();
     }
     public void ReadData(string name)
     {
-        string path = "Assets/Resources/" + name + ".txt";
+        //Resources.UnloadUnusedAssets();
+        string path = Application.dataPath + "/Resources/" + name + ".txt";
+        Debug.Log(path);
 
-        AssetDatabase.ImportAsset(path);
-        TextAsset asset = Resources.Load<TextAsset>(name);
+        //Resources.Load(path);
 
-        saveData = JsonUtility.FromJson<SaveData>(asset.text);
+        string dataToLoad = "";
+        using (FileStream stream = new FileStream(path, FileMode.Open))
+        {
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                dataToLoad = reader.ReadToEnd();
+            }
+        }
+        //TextAsset asset = Resources.Load<TextAsset>(name);
+
+        saveData = JsonUtility.FromJson<SaveData>(dataToLoad);
+        Debug.Log(saveData.Depth);
+        Debug.Log(saveData.Money);
     }
 
 }
