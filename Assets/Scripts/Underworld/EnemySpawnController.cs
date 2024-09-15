@@ -9,6 +9,7 @@ public class EnemySpawnController : MonoBehaviour
 {
     public static EnemySpawnController enemySpawnController;
     WorldManager worldManager;
+    UnderworldControler player;
 
     public GameObject enemyPrefab;
     public Transform spawnPoint1;
@@ -27,6 +28,7 @@ public class EnemySpawnController : MonoBehaviour
     void Start()
     {
         WorldManager worldManager = WorldManager.wm;
+        player = UnderworldControler.player;
         SpawnEnemies();
     }
     void Awake()
@@ -38,12 +40,13 @@ public class EnemySpawnController : MonoBehaviour
     {
         if(storage.transform.childCount == 0)
         {
-            GeneralUI.transform.GetChild(2).gameObject.SetActive(true);
+            GeneralUI.transform.GetChild(3).gameObject.SetActive(true);
             waveButtonPressed = false;
+            Debug.Log(storage.transform.childCount);
         }
         else
         {
-            GeneralUI.transform.GetChild(2).gameObject.SetActive(false);
+            GeneralUI.transform.GetChild(3).gameObject.SetActive(false);
         }
     }
     public void newWave()
@@ -53,7 +56,8 @@ public class EnemySpawnController : MonoBehaviour
             waveButtonPressed = true;
             waveCounter++;
 
-            GeneralUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "Round " + waveCounter;
+            GeneralUI.transform.GetChild(2).GetComponent<TMP_Text>().text = "Round " + waveCounter;
+            player.playerHealth = 100;
 
             SpawnEnemies();
         }

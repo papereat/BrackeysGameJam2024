@@ -68,6 +68,7 @@ public class SaveManager : MonoBehaviour
             if (wm.inOverworld)
             {
                 saveData.Money = playerOW.Money;
+                saveData.TotalMoney = playerOW.TotalMoney;
                 saveData.Day = playerOW.day;
                 saveData.Depth = playerOW.fishingRod.Depth;
                 saveData.Capacity = playerOW.fishingRod.Capacity;
@@ -76,6 +77,7 @@ public class SaveManager : MonoBehaviour
             else
             {
                 saveData.Money = playerUW.Money;
+                saveData.TotalMoney = playerUW.TotalMoney;
                 saveData.Day = playerUW.day;
                 saveData.Depth = playerUW.fishingRod.Depth;
                 saveData.Capacity = playerUW.fishingRod.Capacity;
@@ -100,6 +102,7 @@ public class SaveManager : MonoBehaviour
             if (wm.inOverworld)
             {
                 playerOW.Money = saveData.Money;
+                playerOW.TotalMoney = saveData.TotalMoney;
                 playerOW.day = saveData.Day;
                 playerOW.fishingRod.Depth = saveData.Depth;
                 playerOW.fishingRod.Capacity = saveData.Capacity;
@@ -108,6 +111,7 @@ public class SaveManager : MonoBehaviour
             else
             {
                 playerUW.Money = saveData.Money;
+                playerUW.TotalMoney = saveData.TotalMoney;
                 playerUW.day = saveData.Day;
                 playerUW.fishingRod.Depth = saveData.Depth;
                 playerUW.fishingRod.Capacity = saveData.Capacity;
@@ -149,6 +153,7 @@ public class SaveManager : MonoBehaviour
 public class SaveData
 {
     public float Money;
+    public float TotalMoney;
     public int Day;
     public int Depth;
     public int Capacity;

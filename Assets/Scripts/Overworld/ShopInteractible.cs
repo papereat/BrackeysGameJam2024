@@ -68,6 +68,7 @@ public class ShopInteractible : LocationInteractableComponent
 
             //Change later to depend on type of fish etc. etc.
             player.Money += player.valueOnShip;
+            player.TotalMoney += player.valueOnShip;
             player.valueOnShip = 0;
 
             ShopUI.transform.GetChild(3).GetComponent<TMP_Text>().text = "Money: " + player.Money;
